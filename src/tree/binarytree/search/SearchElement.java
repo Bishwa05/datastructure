@@ -47,6 +47,13 @@ public class SearchElement {
 		}
 		return max;
 	}
+
+	/**
+	 * Find an element in binary tree in recursive manner
+	 * @param root
+	 * @param data
+	 * @return
+	 */
 	
 	public boolean findInBinaryTreeRec(BinaryTreeNode root, int data) {
 		if(root == null)
@@ -55,7 +62,13 @@ public class SearchElement {
 			return true;
 		return findInBinaryTreeRec(root.getLeft(), data)|| findInBinaryTreeRec(root.getRight(), data);
 	}
-	
+
+	/**
+	 * Find an element in Binary tree, Using iterative
+	 * @param root
+	 * @param data
+	 * @return
+	 */
 	public boolean findInBinaryTreeItr(BinaryTreeNode root, int data) {
 		if(root == null)
 			return false;
@@ -70,11 +83,18 @@ public class SearchElement {
 					curr= curr.getLeft();
 				if(curr.getRight() != null)
 					curr = curr.getRight();
+
+				((LinkedList<BinaryTreeNode>) q).push(curr);
 			}
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Find the Deepest Node in the binary tree.
+	 * @param root
+	 * @return
+	 */
 	public BinaryTreeNode deepestNodeInBT(BinaryTreeNode root) {
 		 if(root == null)
 			 return null;
@@ -90,8 +110,12 @@ public class SearchElement {
 		}
 		return tmp;
 	}
-	
-	
+
+	/**
+	 * Find the level of tree with maximum sum.
+	 * @param root
+	 * @return
+	 */
 	public int findLevelWithMaxSum(BinaryTreeNode root) {
 		int maxSum =0, currentSum =0;
 		if(root == null)
@@ -119,5 +143,38 @@ public class SearchElement {
 			}
 		}
 		return maxSum;
+	}
+
+
+	/**
+	 * Check whether the given two trees are isomorphic or not.
+	 * root1 and root2 is isomorphic if they have same structure.
+	 */
+	public boolean isIsomorphic(BinaryTreeNode root1, BinaryTreeNode root2) {
+		if(root1 == null && root2 == null) {
+			return true;
+		}
+		if((root1 == null && root2 !=null) || (root1 != null && root2 == null))
+			return false;
+		return (isIsomorphic(root1.getLeft(),root2.getLeft()) &&
+				isIsomorphic(root1.getRight(), root2.getRight()));
+	}
+
+	/**
+	 * Check whether trees are quasi-isomorphic to each other
+	 * the trees root1 and root 2 are quasi-isomorphic, if root1 can be transformed
+	 * into root2 by swapping the left and right children of root1.
+	 */
+	public boolean quasiIsomorphic(BinaryTreeNode root1, BinaryTreeNode root2) {
+		if(root1 == null && root2 == null){
+			return true;
+		}
+		if((root1 == null && root2 !=null) || (root1 != null && root2 == null))
+			return false;
+		return  ((quasiIsomorphic(root1.getLeft(), root2.getLeft())
+		&& quasiIsomorphic(root1.getRight(), root2.getRight())) ||(
+				quasiIsomorphic(root1.getRight(), root2.getLeft()) &&
+						quasiIsomorphic(root1.getLeft(), root2.getRight())));
+
 	}
 }

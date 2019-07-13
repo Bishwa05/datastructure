@@ -186,7 +186,7 @@ public class CircularLinkedList {
 				p = p.getNext();
 			p.setNext(p.getNext().getNext());
 		}
-		System.out.println("Lat player lefty standing, Josephus position "+p.getData())
+		System.out.println("Lat player lefty standing, Josephus position "+p.getData());
 		return p;
 	}
 }

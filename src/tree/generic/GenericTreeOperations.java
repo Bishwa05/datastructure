@@ -15,5 +15,27 @@ public class GenericTreeOperations {
     /**
      * Given a node of a generic tree find the number of sibling
      */
-    
+    public int siblingCount(GenericTreeNode current) {
+        int count =0;
+        while(current != null){
+            count++;
+            current = current.getNextSibling();
+        }
+        return count;
+    }
+
+
+    /**
+     * Given a node of GenericTree, count the number of children for that node
+     */
+    public int childCount(GenericTreeNode current){
+        int count =0;
+        current = current.getFirstChild();
+        while(current != null){
+            count++;
+            current = current.getNextSibling();
+        }
+        return count;
+    }
+
 }
