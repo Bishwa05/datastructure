@@ -1,7 +1,7 @@
-package linklist.circular;
+package linklist.singly;
 
 public class CircularLinkedList {
-	private CLLNode tail;
+	private ListNode tail;
 	private int length;
 	
 	public CircularLinkedList() {
@@ -15,7 +15,7 @@ public class CircularLinkedList {
 	}
 
 	private void addToHead(int data) {
-		CLLNode tmp = new CLLNode(data);
+        ListNode tmp = new ListNode(data);
 		if(tail == null) {
 			tail = tmp;
 			tail.setNext(tail);
@@ -34,7 +34,7 @@ public class CircularLinkedList {
 	
 	// remove data from head of the list
 	public int removeFromHead() {
-		CLLNode tmp = tail.getNext();
+        ListNode tmp = tail.getNext();
 		if(tail == tail.getNext())
 			tail = null;
 		else {
@@ -49,12 +49,12 @@ public class CircularLinkedList {
 	public int removeFromTail() {
 		if(tail == null)
 			return Integer.MIN_VALUE;
-		CLLNode p = tail;
+        ListNode p = tail;
 		while(p.getNext() != tail) {
 			p = p.getNext();
 		}
 		// p now points to second to last data
-		CLLNode tmp = tail;
+        ListNode tmp = tail;
 		if(p == tail)
 			tail = null;
 		else {
@@ -69,7 +69,7 @@ public class CircularLinkedList {
 	public boolean contains(int data) {
 		if(tail == null)
 			return false;
-		CLLNode p= tail.getNext();
+        ListNode p= tail.getNext();
 		while(p != tail && p.getData() != data)
 			p = p.getNext();
 		return (p.getData() == data);
@@ -78,8 +78,8 @@ public class CircularLinkedList {
 	// Remove and return element == data
 	public int remove(int data) {
 		if(tail == null) return Integer.MIN_VALUE;
-		CLLNode n = tail.getNext();
-		CLLNode p = tail;
+        ListNode n = tail.getNext();
+        ListNode p = tail;
 		
 		for(int i=0; i<length && (!(n.getData() == data)); i++) {
 			p = n;
@@ -117,7 +117,7 @@ public class CircularLinkedList {
 		String result ="[";
 		if(tail == null)
 			return result+"]";
-		CLLNode curr = tail.getNext();
+        ListNode curr = tail.getNext();
 		while(curr != tail) {
 			result = result+" "+curr.getData();
 			curr= curr.getNext();
@@ -131,8 +131,8 @@ public class CircularLinkedList {
 	 * Store the mid and last of circular linked list.
 	 * make 2nd half circular and 1st half circular, then set the head.
 	 */
-	public static void splitList(CLLNode head, CLLNode head1, CLLNode head2){
-		CLLNode slowPtr= head, fastPtr = head;
+	public static void splitList(ListNode head, ListNode head1, ListNode head2){
+        ListNode slowPtr= head, fastPtr = head;
 		if(head == null)
 			return;
 		while((head != fastPtr.getNext()) && (head != fastPtr.getNext().getNext())){
@@ -166,14 +166,14 @@ public class CircularLinkedList {
 	 * Assume the input is a circular linked list with N nodes and ach node has
 	 * a number (range 1 to N) associated with it. The head node has number 1 as data.
 	 */
-	public CLLNode getJosephusPosition(int N, int M) {
-		CLLNode p, q;
+	public ListNode getJosephusPosition(int N, int M) {
+        ListNode p, q;
 		//Create Circular linked list containing all the players
-		p = new CLLNode(1);
-		q = new CLLNode(1);
+		p = new ListNode(1);
+		q = new ListNode(1);
 
 		for(int i=2; i<= N; i++) {
-			CLLNode x = new CLLNode(i);
+            ListNode x = new ListNode(i);
 			p.setNext(x);
 			p = p.getNext();
 		}

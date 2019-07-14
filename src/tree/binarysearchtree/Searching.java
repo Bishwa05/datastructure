@@ -40,7 +40,7 @@ public class Searching {
     /**
      * Find minimum element in BST
      * Time O(n), in worst case only for skew tree
-     * Space O(1)
+     * Space O(n)
      */
     public BSTNode findMinRec(BSTNode root) {
         if(root == null)
@@ -50,4 +50,48 @@ public class Searching {
         else
             return findMinRec(root.getLeft());
     }
+
+    /**
+     * Time O(n), in worst case only for skew tree
+     * Space O(1)
+     * @param root
+     * @return
+     */
+    public BSTNode findMinItr(BSTNode root) {
+        if(root == null)
+            return null;
+        while(root.getLeft() != null)
+            root = root.getLeft();
+        return root;
+    }
+
+    /**
+     * Time O(n), in worst case only for skew tree
+     * Space O(n)
+     * @param root
+     * @return
+     */
+    public BSTNode findMaxRec(BSTNode root) {
+        if(root == null)
+            return null;
+        else if(root.getRight() == null)
+            return root;
+        else
+            return findMaxRec(root.getRight());
+    }
+
+    /**
+     * Time O(n), in worst case only for skew tree
+     * Space O(1)
+     * @param root
+     * @return
+     */
+    public BSTNode findMax(BSTNode root) {
+        if(root == null)
+            return null;
+        while(root.getRight() != null)
+            root= root.getRight();
+        return root;
+    }
+
 }
