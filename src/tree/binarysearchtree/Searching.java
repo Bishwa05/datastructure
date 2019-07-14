@@ -86,12 +86,30 @@ public class Searching {
      * @param root
      * @return
      */
-    public BSTNode findMax(BSTNode root) {
+    public static BSTNode findMax(BSTNode root) {
         if(root == null)
             return null;
         while(root.getRight() != null)
             root= root.getRight();
         return root;
+    }
+
+    /**
+     * Find the LeastCommonAncestor
+     */
+    public BSTNode lca(BSTNode root,BSTNode t1, BSTNode t2) {
+        if(root == null){
+            return root;
+        }
+        if(root == t1 || root ==t2)
+            return root;
+        if(Math.max(t1.getData(), t2.getData())< root.getData())
+            return lca(root.getLeft(),t1,t2);
+        if(Math.min(t1.getData(), t2.getData())> root.getData())
+            return lca(root.getRight(), t1, t2);
+        else
+            return root;
+
     }
 
 }
