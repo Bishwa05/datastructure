@@ -112,4 +112,94 @@ public class Searching {
 
     }
 
+    /**
+     * Check the given tree is BST or not.
+     * parent =0
+     */
+    public boolean isBST(BSTNode root, int parent){
+        if(root == null)
+            return true;
+        if(!isBST(root.getLeft(),parent))
+            return false;
+        if(root.getData() < parent)
+            return false;
+        parent = root.getData();
+        return isBST(root.getRight(), parent);
+    }
+
+    /**
+     * Another simple approach is do inorder traversal and put the elements in a list
+     * After that loop through the list and check if that is sorted.
+     */
+
+
+    /**
+     * Convert a BST to Circular Linked list
+     * Space O(1),
+     */
+    public BSTNode bstToDll(BSTNode root, BSTNode ltail){
+        BSTNode left, ltail, right, rtail;
+
+        if(root == null){
+            ltail = null;
+            return null;
+        }
+        left = bstToDll(root.getLeft(),ltail);
+        right = bstToDll(root.getRight(),rtail);
+        root.setLeft(ltail);
+        root.setRight(rtail);
+
+        if(right == null)
+            ltail = root;
+        else {
+            right.setLeft(root);
+            ltail = rtail;
+        }
+
+        if(left == null)
+            return root;
+        else {
+            ltail.setRight(root);
+            return left
+        }
+
+    }
+
+
+    /**
+     * Convert a sorted doubly linked list to balanced binary tree
+     *
+     */
+    public BSTNode sortedListToBST(ListNode head) {
+
+        int len =0;
+        ListNode currentNode = head;
+        while(currentNode != null){
+            len++;
+            currentNode = currentNode.getNext();
+        }
+        return constrctRec(head, 0, len-1);
+
+    }
+
+    public BSTNode constructRec(ListNode head, int start, int end) {
+        if(start>end) {
+            return null;
+        }
+        int mid = start + (end - start)/2;
+
+        BSTNode root = new BST(head.getData());
+        BSTNode left = constructRec(ListNode head,start,mid-1);
+        root.setLeft(left);
+
+        if(head.getNext() != null) {
+            head.setData(head.getNext().getData());
+            head.setNext(head.getNext().getNext());
+        }
+
+        root.setRight(constructRec(ListNode head, mid+1, end));
+        return root;
+    }
+
+
 }

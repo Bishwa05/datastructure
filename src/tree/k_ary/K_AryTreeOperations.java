@@ -15,7 +15,7 @@ public class K_AryTreeOperations {
 
         if(newNode == null){
             System.out.println("Memory Error");
-            return;
+            return null;
         }
         newNode.setData(A[index]);
 

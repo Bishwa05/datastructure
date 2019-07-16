@@ -198,6 +198,64 @@ public class SearchInList {
 	 * 1. get the middle of the linked list
 	 * 2. reverse the 2nd half
 	 * 3. compare the 1st and 2nd half
+	 * TODO:
 	 */
+
+	/**
+	 *
+	 * Find the last element from linked list whose n%k ==0,
+	 * where n is the number of elements in the list, k is constant provided
+	 * if n = 16 and k =5, it should return 15th node
+	 * Time O(n) Space O(1)
+	 */
+	public ListNode findModularNode(ListNode head, int k) {
+		ListNode mod = head;
+		int i=0;
+		if(k<=0)
+			return null;
+		while(head != null){
+			if(i%k ==0){
+				mod = head;
+			}
+			i++;
+			head = head.getNext();
+		}
+		return mod;
+	}
+
+	/**
+	 * Modular node from end
+	 * Find the 1st element from end  whose n%k ==0
+	 * where n is no of element and k is an integer provided
+	 * if n = 19, k = 3 , then result = 16
+	 *
+	 * This can be achieved by 2 pointers.
+	 *
+	 * Space O(1) and time O(n).
+	 *
+	 */
+
+
+	/**
+	 * Find fractional node
+	 * Find n/k th element from a linked list. where n is no of elements
+	 * if n =15 and k = 4 , result = 12th element
+	 * n is not known in advance
+	 */
+	public ListNode getFractionNode(ListNode head, int k) {
+		ListNode fracNode = head;
+		int i=0;
+		if (k <= 0)
+			return null;
+		while(head != null){
+			if(i%k ==0)
+				fracNode = head;
+			i++;
+			head = head.getNext();
+		}
+		return fracNode;
+	}
+
+
 
 }

@@ -1,6 +1,10 @@
 package linklist.singly.traversal;
 
+import linklist.singly.LinkedList;
 import linklist.singly.ListNode;
+
+import java.util.Queue;
+import java.util.Stack;
 
 public class Traversal {
 	
@@ -284,5 +288,41 @@ public class Traversal {
 	 */
 
 
+	/**
+	 * Reorder a list like below
+	 * l1-> l2->l3-> ......->ln-2, ln-1, ln
+	 * l1->ln->l2->ln-1->l3->ln-2.......
+	 * 	1. Divide the list into 2.
+	 * 	2. reverse the 2nd half.
+	 * 	3. Combine the two list
+	 */
+	public void reOrderList(ListNode head){
+		if(head == null)
+			return;
+		ListNode sPointer = head;
+		ListNode fPointer = head.getNext();
+
+		while(fPointer != null && fPointer.getNext() != null){
+			fPointer = fPointer.getNext().getNext();
+			sPointer = sPointer.getNext();
+		}
+		ListNode head2 = sPointer;
+		sPointer.setNext(null);
+		Stack<ListNode> stack= new Stack<>();
+
+		while(head2 != null){
+			ListNode temp= head2;
+			head2 = head2.getNext();
+			temp.setNext(null);
+			stack.push(temp);
+		}
+
+		while(!stack.isEmpty()) {
+			ListNode temp = stack.pop();
+			temp.setNext(head.getNext());
+			head.setNext(temp);
+			head = temp.getNext();
+		}
+	}
 
 }
