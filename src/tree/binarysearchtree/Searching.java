@@ -1,5 +1,8 @@
 package tree.binarysearchtree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Searching {
     /**
      * Find an element in Binary Search Tree
@@ -160,46 +163,92 @@ public class Searching {
             return root;
         else {
             ltail.setRight(root);
-            return left
+            return left;
         }
 
     }
-
 
     /**
-     * Convert a sorted doubly linked list to balanced binary tree
-     *
+     * Find kth smallest element in a BST.
+     * Compare while doing Inorder traversal
+     * Time Complexity O(n) Space Complexity O(n)
      */
-    public BSTNode sortedListToBST(ListNode head) {
-
-        int len =0;
-        ListNode currentNode = head;
-        while(currentNode != null){
-            len++;
-            currentNode = currentNode.getNext();
-        }
-        return constrctRec(head, 0, len-1);
-
-    }
-
-    public BSTNode constructRec(ListNode head, int start, int end) {
-        if(start>end) {
+    public BSTNode kthSmallestNode(BSTNode root, int k, int count) {
+        if(root == null)
             return null;
-        }
-        int mid = start + (end - start)/2;
-
-        BSTNode root = new BST(head.getData());
-        BSTNode left = constructRec(ListNode head,start,mid-1);
-        root.setLeft(left);
-
-        if(head.getNext() != null) {
-            head.setData(head.getNext().getData());
-            head.setNext(head.getNext().getNext());
-        }
-
-        root.setRight(constructRec(ListNode head, mid+1, end));
-        return root;
+        BSTNode left = kthSmallestNode(root.getLeft(), k, count);
+        if(left != null)
+            return left;
+        if(++count == k)
+            return root;
+        return kthSmallestNode(root.getRight(),k,count);
     }
 
+    /**
+     * Find floor and ceil of a number present in BST
+     * [1,2,4,7,10,15], X = 8 floor 7 ceil 10
+     */
+    public BSTNode floorInBSTUtil(BSTNode root, BSTNode prev, int data){
+        if(root == null)
+            return null;
+        if(floorInBSTUtil(root.getLeft(), prev, data) !=null)
+            return 0;
+        if(root.getData() == data)
+            return root;
+        if(root.getData()> data)
+            return prev;
+        prev = root;
+        return floorInBSTUtil(root.getRight(),prev,data);
 
+    }
+
+    public BSTNode ceilingInBSTUtil(BSTNode root, BSTNode prev, int data){
+        if(root == null)
+            return null;
+        if(ceilingInBSTUtil(root.getRight(), prev, data) !=null)
+            return 0;
+        if(root.getData() == data)
+            return root;
+        if(root.getData()< data)
+            return prev;
+        prev = root;
+        return ceilingInBSTUtil(root.getLeft(),prev,data);
+
+    }
+
+    /**
+     * Print all the elements of a BST between 2 numbers(say k1 and k2)
+     */
+    public void rangePrint(BSTNode root, int k1, int k2) {
+        if(root == null)
+            return;
+        if(root.getData() >=k1)
+            rangePrint(root.getLeft(), k1, k2);
+        if(root.getData() >=k1 && root.getData() <=k2)
+            System.out.println(root.getData());
+        if(root.getData()<= k2)
+            rangePrint(root.getRight(), k1, k2);
+    }
+
+    /**
+     * Another approach of above problem level order traversal,
+     * adding elements to queue.
+     */
+    public void rangePrint2(BSTNode root, int k1, int k2) {
+        BSTNode temp;
+        Queue<BSTNode> q = new LinkedList<>();
+        if(root == null)
+            return;
+        ((LinkedList<BSTNode>) q).push(root);
+        while(!q.isEmpty()){
+            temp = ((LinkedList<BSTNode>) q).pop();
+            if(temp.getData()>= k1 && temp.getData() <= k2)
+                System.out.println(temp.getData());
+            if(temp.getLeft() != null && temp.getData()>=k1)
+                ((LinkedList<BSTNode>) q).push(temp.getLeft());
+            if(temp.getRight() != null && temp.getData() <=k1)
+                ((LinkedList<BSTNode>) q).push(temp.getRight());
+
+        }
+    }
 }
