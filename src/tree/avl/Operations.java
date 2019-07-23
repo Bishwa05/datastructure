@@ -5,6 +5,16 @@ import tree.binarysearchtree.BSTNode;
 public class Operations {
 
     /**
+     * Searing in avl tree becomes O(h), where h is the height of avl tree.
+     */
+    public int height(AVLTreeNode root) {
+        if(root == null)
+            return -1;
+        else
+            return root.getHeight();
+    }
+
+    /**
      * Given a BST, check whether it is AVLTree or not
      */
     public boolean isAVLTree(BSTNode root) {
