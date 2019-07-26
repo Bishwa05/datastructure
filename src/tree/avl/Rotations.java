@@ -70,4 +70,10 @@ public class Rotations {
 
 
 
+    public AVLTreeNode rlRotation(AVLTreeNode z) {
+        z.setRight(rotateLeft(z.getRight()));
+        return rotateRight(z);
+    }
+
+
 }
