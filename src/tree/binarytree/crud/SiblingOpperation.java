@@ -48,4 +48,15 @@ public class SiblingOpperation {
 		fillNextSiblings2(root.getLeft());
 	}
 
+
+	/**
+	 * Just one step further.
+	 * Connect all adjacent nodes at same level
+	 */
+	public void linkLevelNodes(SiblingBinaryTreeNode root) {
+		if(root == null)
+			return;
+	}
+
+
 }

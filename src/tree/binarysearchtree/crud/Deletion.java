@@ -56,4 +56,34 @@ public class Deletion {
         }
         return root;
     }
+
+    /**
+     * Given a BST and 2 integer the ask is to delete the nodes which are not in the
+     * range of the given 2 integers
+     *
+     *               49                                    49
+     *          37        89                          37        53
+     *       13     41  53                        25     41         71
+     *     7    19          71                                   60
+     *              25    60    82                  prune(24, 71)
+     *
+     *        prune(53,79)              prune(17, 41)
+     *            53                        37
+     *                  71              19        41
+     *              60                      25
+     */
+    public BSTNode pruneBST(BSTNode root, int a, int b) {
+        if(root == null)
+            return null;
+        root.setLeft(pruneBST(root.getLeft(), a, b));
+        root.setRight(pruneBST(root.getRight(), a, b));
+
+        if(a <= root.getData() && root.getData()<= b)
+            return root;
+        if(root.getData()<a)
+            return root.getRight();
+        if(root.getData()>b)
+            return root.getLeft();
+        return null; // This will not be reachable in logic.
+    }
 }

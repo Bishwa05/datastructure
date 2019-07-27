@@ -2,7 +2,7 @@ package tree.avl;
 
 public class Rotations {
 
-    public int getHeight(AVLTreeNode root) {
+    public static int getHeight(AVLTreeNode root) {
         if(root == null)
             return 0;
 
@@ -18,7 +18,7 @@ public class Rotations {
      *  single left rotation
      *
      */
-    public AVLTreeNode rotateLeft(AVLTreeNode x) {
+    public static AVLTreeNode rotateLeft(AVLTreeNode x) {
         AVLTreeNode w = x.getLeft();
         x.setLeft(w.getRight());
         w.setRight(x);
@@ -37,7 +37,7 @@ public class Rotations {
      *  single right rotation
      *
      */
-    public AVLTreeNode rotateRight(AVLTreeNode w) {
+    public static AVLTreeNode rotateRight(AVLTreeNode w) {
         AVLTreeNode x = w.getRight();
         w.setRight(x.getLeft());
         x.setLeft(w);
@@ -63,14 +63,24 @@ public class Rotations {
      *                  left rotation at z
      *   LR Rotation (Left Right Rotation)
      */
-    public AVLTreeNode lrRotation(AVLTreeNode z) {
+    public static AVLTreeNode lrRotation(AVLTreeNode z) {
         z.setLeft(rotateRight(z.getLeft()));
         return rotateLeft(z);
     }
 
-
-
-    public AVLTreeNode rlRotation(AVLTreeNode z) {
+    /**
+     *
+     *                  x                                     x
+     *            a             z        -->            a            y
+     *                      y       d                            b       z
+     *                  b       c                                     c     d
+     *
+     *                                                          |
+     *                                     y                    |
+     *                               x           z           <--
+     *                            a     b     c      d
+     */
+    public static AVLTreeNode rlRotation(AVLTreeNode z) {
         z.setRight(rotateLeft(z.getRight()));
         return rotateRight(z);
     }

@@ -140,7 +140,7 @@ public class Searching {
      * Convert a BST to Circular Linked list
      * Space O(1),
      */
-    public BSTNode bstToDll(BSTNode root, BSTNode ltail){
+    /*public BSTNode bstToDll(BSTNode root, BSTNode ltail){
         BSTNode left, ltail, right, rtail;
 
         if(root == null){
@@ -166,7 +166,7 @@ public class Searching {
             return left;
         }
 
-    }
+    }*/
 
     /**
      * Find kth smallest element in a BST.
@@ -192,7 +192,7 @@ public class Searching {
         if(root == null)
             return null;
         if(floorInBSTUtil(root.getLeft(), prev, data) !=null)
-            return 0;
+            return new BSTNode(0);
         if(root.getData() == data)
             return root;
         if(root.getData()> data)
@@ -206,7 +206,7 @@ public class Searching {
         if(root == null)
             return null;
         if(ceilingInBSTUtil(root.getRight(), prev, data) !=null)
-            return 0;
+            return new BSTNode(0);
         if(root.getData() == data)
             return root;
         if(root.getData()< data)

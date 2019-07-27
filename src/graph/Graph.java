@@ -1,13 +1,18 @@
 package graph;
 
-import java.util.Stack;
+import java.util.*;
 
 public class Graph {
     private final int maxVertex = 20;
     public Vertex vertexList[];
     public int adjMatrix[][];
     public int vertexCount;
+
+    //For dfs traversal
     public Stack<Integer> theStack;
+
+    //For bfs traversal
+    public Queue<Integer> theQueue;
 
     public Graph() {
         vertexList = new Vertex[maxVertex];
@@ -17,7 +22,11 @@ public class Graph {
         for(int y=0; y<maxVertex; y++)
             for(int x=0; x<maxVertex; x++)
                 adjMatrix[x][y] =0;
+
             theStack = new Stack();
+
+            theQueue = new LinkedList<>();
+
     }
 
     public void addVertex(char lab) {
