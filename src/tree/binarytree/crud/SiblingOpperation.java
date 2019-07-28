@@ -56,6 +56,34 @@ public class SiblingOpperation {
 	public void linkLevelNodes(SiblingBinaryTreeNode root) {
 		if(root == null)
 			return;
+
+		SiblingBinaryTreeNode rightMostNode = null;
+		SiblingBinaryTreeNode nextHead = null;
+		SiblingBinaryTreeNode temp = root;
+
+		while(temp!= null){
+			if(temp.getLeft()!= null) {
+				if(rightMostNode == null) {
+					rightMostNode = temp.getLeft();
+					nextHead = temp.getLeft();
+				} else {
+					rightMostNode.setNextSibling(temp.getLeft());
+					rightMostNode = rightMostNode.getNextSibling();
+				}
+			}
+
+			if(temp.getRight()!= null) {
+				if(rightMostNode == null) {
+					rightMostNode = temp.getRight();
+					nextHead = temp.getRight();
+				} else {
+					rightMostNode.setNextSibling(temp.getRight());
+					rightMostNode = rightMostNode.getNextSibling();
+				}
+			}
+			temp = temp.getNextSibling();
+		}
+		//connect(nextHead);
 	}
 
 

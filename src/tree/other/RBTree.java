@@ -1,4 +1,4 @@
-package tree.rb;
+package tree.other;
 
 /**
  * 1. Every node is either red or black.
