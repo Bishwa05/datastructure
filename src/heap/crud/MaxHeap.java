@@ -118,4 +118,51 @@ public class MaxHeap {
         h.count = oldSize;
     }
 
+    /**
+     * Delete ith indexed element in a min heap
+     * Time Complexity - O(logn)
+     */
+    public int delete(Heap h, int i) {
+        int key;
+        if(h.count<i){
+            System.out.println("Wrong position");
+            return -1;
+        }
+        key = h.array[i];
+        h.array[i]= h.array[h.count-1];
+        h.count--;
+        percolateDown(h, i);
+        return key;
+    }
+
+    /**
+     * Find kth smallest element in min heap
+     * Just delete k-1 elements and return the kth element
+     * Time Complexity O(klogn)
+     */
+    public int findKthSmallestElement(Heap h, int k) {
+        for(int i=0; i<k-1; i++)
+            deleteMax(h);
+        return deleteMax(h);
+    }
+
+    /**
+     * Improved approach of kth smallest element
+     */
+//    Heap hOriginal, hAuxiliary;
+//    public int findKthSmallestElement2(Heap h, int k) {
+//        int heapElement;
+//        int count =1;
+//        hAuxiliary.insert(hOriginal.deleteMin());
+//
+//        while (true) {
+//            heapElement = hAuxiliary.delteMin();
+//            if(++count ==k){
+//                return heapElement;
+//            } else {
+//                hAuxiliary.insert(hOriginal.leftChild(count));
+//                hAuxiliary.insert(hOriginal.leftChild(count));
+//            }
+//        }
+//    }
 }
