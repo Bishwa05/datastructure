@@ -1,11 +1,11 @@
 import java.util.LinkedList;
 
-public class GraphAdjListRep {
+public class SimpleGraphAdjListRep {
 
     private int numVertices;
     private LinkedList<Integer> adjLists[];
 
-    GraphAdjListRep(int vertices)
+    SimpleGraphAdjListRep(int vertices)
     {
         numVertices = vertices;
         adjLists = new LinkedList[vertices];
@@ -21,7 +21,7 @@ public class GraphAdjListRep {
 
     public static void main(String args[])
     {
-        GraphAdjListRep g = new GraphAdjListRep(4);
+        SimpleGraphAdjListRep g = new SimpleGraphAdjListRep(4);
 
         g.addEdge(0, 1);
         g.addEdge(0, 2);
