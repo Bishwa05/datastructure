@@ -7,7 +7,12 @@ import java.util.Arrays;
  *             B        C
  *                  D
  *             E        F
- */
+ *
+ *  While reading through POM file we get the parent dependencies needed for the current POM.
+ *
+ *  So here the suppose current POM is a character which is first argument and list of parent dependencies
+ *  are the 2nd argument to the method createMyDAG().
+ * */
 public class MyDependencyResolver {
 
     public static void main(String arg[]) {
