@@ -45,7 +45,7 @@ public class MyDAG {
                             StringBuffer sb = new StringBuffer();
                             parentDataList.forEach((e) ->sb.append(e));
                             System.out.println("Cyclic Dependency found: Execution broken  at "+data+" with parent : " +sb.toString());
-                            break;
+                            return;
                         }
                         parentS.addAll(parentNode.parentSet);
                     }
