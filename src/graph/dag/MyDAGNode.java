@@ -1,20 +1,20 @@
 package graph.dag;
 
-import java.util.LinkedList;
+import java.util.Set;
 
 public class MyDAGNode {
 
-    private char data;
-    private LinkedList<Character> childList;
-    private LinkedList<Character> parentList;
+    public char data;
+    public Set<Character> parentSet;
 
 
     MyDAGNode(char data)
     {
        this.data = data;
-       this.childList = null;
-       this.parentList = null;
+       this.parentSet = null;
     }
+
+
 
 
 }
