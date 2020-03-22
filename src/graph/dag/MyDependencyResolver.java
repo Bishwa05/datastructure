@@ -10,8 +10,6 @@ import java.util.Arrays;
  */
 public class MyDependencyResolver {
 
-
-
     public static void main(String arg[]) {
         MyDAG myDag = new MyDAG();
 
@@ -30,6 +28,10 @@ public class MyDependencyResolver {
 
         myDag.printAllParentsPerNode();
 
+        //Again Error found
+        myDag.createMyDAG('D', Arrays.asList('E'));
+
+        myDag.printAllParentsPerNode();
 
     }
 }

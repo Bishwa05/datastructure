@@ -2,6 +2,17 @@ package graph.dag;
 
 import java.util.*;
 
+class MyDAGNode {
+
+    public char data;
+    public Set<Character> parentSet;
+
+
+    MyDAGNode(char data) {
+        this.data = data;
+        this.parentSet = null;
+    }
+}
 public class MyDAG {
 
     MyDAGNode root;
@@ -33,9 +44,7 @@ public class MyDAG {
                         if(parentNode.parentSet.contains(currentNode.data)) {
                             StringBuffer sb = new StringBuffer();
                             parentDataList.forEach((e) ->sb.append(e));
-
-                            System.out.print("Cyclic Dependency found: Execution broken  at ");
-                            System.out.println(data+" with parent : " +sb.toString());
+                            System.out.println("Cyclic Dependency found: Execution broken  at "+data+" with parent : " +sb.toString());
                             break;
                         }
                         parentS.addAll(parentNode.parentSet);
