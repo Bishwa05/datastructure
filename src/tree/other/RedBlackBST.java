@@ -24,6 +24,21 @@ import java.util.Scanner;
  *
  *
  */
+
+/**
+ *
+ *  This implementation uses a left-leaning red-black BST.
+ *  The put, get, contains, remove, minimum, maximum, ceiling, floor, rank, and select operations each take
+ *  &Theta;(log n) time in the worst case, where <em>n</em> is the
+ *  number of key-value pairs.
+ *  The size, and is-empty operations take &Theta;(1) time.
+ *  The keys methods take O(log n + m) time, where m is the number of keys returned by the iterator.
+ *  Construction takes &Theta;(1) time.
+ *
+ *
+ * @param <Key>
+ * @param <Value>
+ */
 public class RedBlackBST<Key extends Comparable<Key>, Value>{
     private static final boolean RED   = true;
     private static final boolean BLACK = false;
