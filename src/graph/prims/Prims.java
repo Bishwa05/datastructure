@@ -83,7 +83,7 @@ public class Prims {
     public static void main(String[] args)
     {
         /* Let us create the following graph
-        2 3
+            2    3
         (0)--(1)--(2)
         |   / \   |
        6| 8/   \5 |7
