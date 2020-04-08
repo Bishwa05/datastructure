@@ -1,6 +1,8 @@
 package tree.binarysearchtree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Searching {
@@ -118,10 +120,15 @@ public class Searching {
     /**
      * Check the given tree is BST or not.
      * parent =0
+     *
      */
     public boolean isBST(BSTNode root, int parent){
         if(root == null)
             return true;
+        if(root.getLeft()!=null && root.getRight()== null ||
+        root.getLeft()== null && root.getRight()!= null){
+            return false;
+        }
         if(!isBST(root.getLeft(),parent))
             return false;
         if(root.getData() < parent)
@@ -131,9 +138,52 @@ public class Searching {
     }
 
     /**
+     * Sucessfull in leetcode submission
+     * @param node
+     * @param lower
+     * @param upper
+     * @return
+     */
+    public boolean helper(BSTNode node, Integer lower, Integer upper) {
+        if (node == null) return true;
+
+        int val = node.getData();
+        if (lower != null && val <= lower) return false;
+        if (upper != null && val >= upper) return false;
+
+        if (! helper(node.getRight(), val, upper)) return false;
+        if (! helper(node.getLeft(), lower, val)) return false;
+        return true;
+    }
+    public boolean isValidBST(BSTNode root) {
+        return helper(root, null, null);
+    }
+
+    /**
      * Another simple approach is do inorder traversal and put the elements in a list
      * After that loop through the list and check if that is sorted.
+     *
      */
+
+    public boolean inOrderTraversal(BSTNode root) {
+        List<Integer> inOrderList = new ArrayList();
+        inOrder(root, inOrderList);
+        Integer prev = null; // Integer.minval  getting failed if present
+        for(int i : inOrderList){
+            if(prev != null && prev>=i){
+                return false;
+            }
+            prev =i;
+        }
+        return true;
+    }
+
+    public void inOrder(BSTNode root, List inOrderList){
+        if(root.getLeft() != null) inOrder(root.getLeft(), inOrderList);
+        inOrderList.add(root.getData());
+        if(root.getRight() != null) inOrder(root.getRight(), inOrderList);
+
+    }
 
 
     /**
