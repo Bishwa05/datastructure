@@ -1,8 +1,6 @@
 package stack;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Operations {
 
@@ -34,7 +32,14 @@ public class Operations {
     public static void main(String args[])
     {
         int n = 4; // Number of disks
-        towerOfHanoi(n, 'A', 'C', 'B');  // A, B and C are names of rods
+        //towerOfHanoi(n, 'A', 'C', 'B');  // A, B and C are names of rods
+
+        //String x = "(]";
+        //String x = "()[]{}";
+        //String x = "{[]}";
+        //String x="]]";
+        String x ="(])";
+        System.out.println(isValidParenthesis(x));
     }
 
     /**
@@ -60,5 +65,30 @@ public class Operations {
             s.push(q.remove());
         }
         return pairwiseOrdered;
+    }
+
+    public static boolean isValidParenthesis(String s) {
+        Stack<Character> stack = new Stack();
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')','(');
+        map.put('}','{');
+        map.put(']','[');
+        boolean isValid= true;
+
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if('('==c || '{'==c || '['==c) {
+                stack.push(c);
+            } else{
+                if(stack.isEmpty() || map.get(c)!=stack.peek()){
+                    isValid = false;
+                    break;
+                } else{
+                    stack.pop();
+                }
+            }
+        }
+
+        return stack.isEmpty() && isValid;
     }
 }
