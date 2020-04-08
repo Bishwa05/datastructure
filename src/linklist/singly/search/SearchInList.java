@@ -179,6 +179,7 @@ public class SearchInList {
 		ListNode ptr1x, ptr2x;
 		ptr1x = ptr2x = head;
 		int i=0;
+		int j =0;
 
 		while(ptr1x.getNext() != null){
 			if(i==0) {
@@ -189,8 +190,25 @@ public class SearchInList {
 				ptr2x = ptr2x.getNext();
 				i=0;
 			}
+			j++;
 		}
-		return ptr2x;
+		return (j%2==0)?ptr2x:ptr2x.getNext();
+	}
+
+	/**
+	 * more simple approach without using any extra variables like above.
+	 * Accepted in leetcode submissions.
+	 * Time complexity remains O(n)
+	 * @param head
+	 * @return
+	 */
+	public static ListNode findMiddle2(ListNode head){
+		ListNode slow = head, fast = head;
+		while (fast != null && fast.getNext() != null) {
+			slow = slow.getNext();
+			fast = fast.getNext().getNext();
+		}
+		return slow;
 	}
 
 	/**
