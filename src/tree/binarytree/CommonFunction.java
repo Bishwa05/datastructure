@@ -129,20 +129,7 @@ public class CommonFunction {
 		}
 		return count;
 	}
-	
-	//Approach1
-	public int diameterOfBTRec(BinaryTreeNode root) {
-		int diameter =0;
-		if(root == null)
-			return 0;
-		int left, right;
-		left = diameterOfBTRec(root.getLeft());
-		right = diameterOfBTRec(root.getRight());
-		
-		if(left+right >diameter)
-			diameter = left+right;
-		return Math.max(left, right)+1;
-	}
+
 	
 	public int diameter(BinaryTreeNode root) {
 		if(root ==null) return 0;
@@ -164,6 +151,34 @@ public class CommonFunction {
 		int leftDepth = height(root.getLeft());
 		int rightDepth = height(root.getRight());
 		return (leftDepth> rightDepth)? leftDepth+1: rightDepth+1;
+	}
+
+
+
+	class Height{
+		int h = Integer.MIN_VALUE;
+	}
+
+	public int height(BinaryTreeNode root, Height x) {
+		if(root == null)
+			return 0;
+
+		int leftH, rightH;
+		leftH = height(root.getLeft(), x);
+		rightH = height(root.getRight(), x);
+
+		x.h = Math.max(x.h,1+leftH+rightH);
+
+		return 1+ Math.max(leftH, rightH);
+	}
+	//This approach is correct as solution passes  thorough in leetcode.
+	public int diameterOfBinaryTree(BinaryTreeNode root) {
+		if(root == null)
+			return 0;
+		Height obj = new Height();
+		height(root,obj);
+
+		return obj.h-1;
 	}
 	
 	public int maxWidthRec(BinaryTreeNode root) {
