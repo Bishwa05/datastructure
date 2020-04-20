@@ -224,10 +224,31 @@ public class Traversal {
 	 * 5.Go to step1.
 	 * 6.K-1th node of first K nodes become the new head if available.
 	 * Otherwise we can return head
+	 *
+	 *
+	 * 		Input [1,2,3,4,5]
+	 * 			k : 3
+	 * 	Output should be 3,2,1,4,5	(Added as per leetcode)
 	 */
 	public static ListNode reverseKNodesRec(ListNode head, int k) {
 		ListNode current = head, next = null, prev = null;
 		int count = k;
+
+		while(current!= null){
+			current = current.getNext();
+			count--;
+			if(count ==0){
+				break;
+			}
+		}
+
+		if(count ==0){
+			current = head;
+			count= k;
+		} else{
+			return head;
+		}
+
 		//Reverse k nodes
 		while(current != null && count >0){
 			next = current.getNext();
