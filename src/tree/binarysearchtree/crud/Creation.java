@@ -89,4 +89,36 @@ public class Creation {
         return head.getData();
     }
 
+    public  BSTNode constructBST(int[] preorder, int start, int end)
+    {
+        // base case
+        if (start > end) {
+            return null;
+        }
+
+
+        BSTNode node = new BSTNode(preorder[start]);
+
+        int i;
+        for (i = start; i <= end; i++) {
+            if (preorder[i] > node.getData()) {
+                break;
+            }
+        }
+
+        // recursively construct the left sub-tree
+        node.setLeft(constructBST(preorder, start + 1, i - 1));
+
+        // recursively construct the right sub-tree
+        node.setRight(constructBST(preorder, i, end));
+
+        // return current node
+        return node;
+    }
+
+    public BSTNode bstFromPreorder(int[] preorder) {
+        BSTNode root = constructBST(preorder, 0, preorder.length - 1);
+        return root;
+    }
+
 }
