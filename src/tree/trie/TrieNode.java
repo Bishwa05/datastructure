@@ -1,17 +1,17 @@
 package tree.trie;
 
 /**
- * Hello, Hell, held, hold
+ * Hello, Hell, held, hold, xxy
+ *                      0
  *
- *          H
- *          E   O
- *     D    L   L
+ *          H                   X
+ *          E   O               X
+ *     D    L   L               Y
  *          L   D
  *          O
  */
 public class TrieNode {
-    static TrieNode root;
-    static int reach;
+     TrieNode root;
 
     static final int ALPHABET_SIZE = 26;
     TrieNode[] children = new TrieNode[ALPHABET_SIZE];
@@ -25,47 +25,57 @@ public class TrieNode {
         }
     }
 
-    public static void insert(String key){
-        int length = key.length();
-        int index;
-
-        if(root == null) {
+    public void insert(String word) {
+        if(root == null){
             root = new TrieNode();
         }
+        TrieNode curr = root;
 
-        TrieNode next = root;
-
-        for(int level =0; level< length; level++) {
-            index = key.charAt(level) -'a';
-            if(next.children[index] == null) {
-                next.children[index] = new TrieNode();
+        for(int i=0; i<word.length(); i++){
+            int index = word.charAt(i)-'a';
+            if(curr.children[index]==null){
+                curr.children[index] = new TrieNode();
             }
+            curr = curr.children[index];
         }
+        curr.isLeaf = true;
 
-        //mark the leaf node.
-        next.isLeaf = true;
     }
 
-    public static String traverse() {
-        TrieNode next = root;
-        String prefix ="";
+    public boolean startsWith(String prefix) {
 
-        while(countChildren(next) ==1 && !next.isLeaf){
-            next = next.children[reach];
-            prefix = prefix+(char)('a'+reach);
+        TrieNode curr = root;
+
+        if(curr == null){
+            return false;
         }
-        return prefix;
-    }
-
-    public static int countChildren(TrieNode node) {
-        int count =0;
-        for(int i=0; i<ALPHABET_SIZE; i++){
-            if(node.children[i] != null){
-                reach =i;
-                count++;
+        for(int i=0; i<prefix.length(); i++){
+            int index = prefix.charAt(i)-'a';
+            if(curr.children[index]==null){
+                return false;
             }
+            curr = curr.children[index];
         }
-        return count;
+        return true;
     }
+
+    public boolean search(String word) {
+
+        TrieNode curr = root;
+
+        if(curr == null){
+            return false;
+        }
+        for(int i=0; i<word.length(); i++){
+            int index = word.charAt(i)-'a';
+            if(curr.children[index]==null){
+                return false;
+            }
+            curr = curr.children[index];
+        }
+
+        return curr.isLeaf?true:false;
+    }
+
 
 }
