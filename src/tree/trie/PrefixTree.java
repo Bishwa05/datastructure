@@ -1,27 +1,14 @@
 package tree.trie;
 
-/**
- * Hello, Hell, held, hold, xxy
- *                      0
- *
- *          H                   X
- *          E   O               X
- *     D    L   L               Y
- *          L   D
- *          O
- */
-public class TrieNode {
-     TrieNode root;
+public class PrefixTree {
+    TrieNode root;
+    public class TrieNode {
+        TrieNode[] children;
+        boolean isLeaf;
 
-    static final int ALPHABET_SIZE = 26;
-    TrieNode[] children = new TrieNode[ALPHABET_SIZE];
-
-    boolean isLeaf;
-
-    public TrieNode() {
-        isLeaf = false;
-        for(int i=0; i<ALPHABET_SIZE; i++) {
-            children[i] = null;
+        public TrieNode() {
+            isLeaf = false;
+            children = new TrieNode[26];
         }
     }
 
@@ -49,6 +36,7 @@ public class TrieNode {
         if(curr == null){
             return false;
         }
+
         for(int i=0; i<prefix.length(); i++){
             int index = prefix.charAt(i)-'a';
             if(curr.children[index]==null){
@@ -77,5 +65,19 @@ public class TrieNode {
         return curr.isLeaf?true:false;
     }
 
+    public static void main(String arg[]){
 
+        PrefixTree p = new PrefixTree();
+        TrieNode root = p.new TrieNode();
+        p.root= root;
+
+        p.insert("apple");
+        System.out.println(p.search("apple"));
+        System.out.println(p.search("app"));
+        System.out.println(p.startsWith("app"));
+        p.insert("app");
+        System.out.println(p.search("app"));
+
+        System.out.println(p.startsWith("a"));
+    }
 }
