@@ -51,6 +51,7 @@ public class WordDictionary {
                 String newWord = word.substring(i+1);
 
                 boolean found = false;
+                //Recursively go to each child and find the feasible path.
                 for(int j =0; j<26; j++){
                     if (curr.children[j] != null) {
                         found = searchUtil(newWord, curr.children[j]);
