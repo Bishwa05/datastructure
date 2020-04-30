@@ -13,9 +13,9 @@ public class InOrderTraversal {
 
 	public void inOrderRec(BinaryTreeNode root) {
 		if(root != null) {
-			inOrderRec(root.getLeft());
-			System.out.println(root.getData());
-			inOrderRec(root.getRight());
+			inOrderRec(root.left);
+			System.out.println(root.data);
+			inOrderRec(root.right);
 		}
 	}
 	
@@ -27,14 +27,14 @@ public class InOrderTraversal {
 		while(!done) {
 			if(currNode != null) {
 				s.push(currNode);
-				currNode = currNode.getLeft();
+				currNode = currNode.left;
 			}else {
 				if(s.isEmpty())
 					done= true;
 				else {
 					currNode = s.pop();
-					System.out.println(currNode.getData());
-					currNode = currNode.getRight();
+					System.out.println(currNode.data);
+					currNode = currNode.right;
 				}
 			}
 		}

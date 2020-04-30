@@ -23,10 +23,10 @@ public class SiblingOpperation {
 			tmp = q.poll();
 			if(tmp != null) {
 				tmp.setNextSibling(q.peek());
-				if(tmp.getLeft() != null)
-					q.offer(tmp.getLeft());
-				if(tmp.getRight() !=null)
-					q.offer(tmp.getRight());
+				if(tmp.left != null)
+					q.offer(tmp.left);
+				if(tmp.right !=null)
+					q.offer(tmp.right);
 			} else {
 				if(!q.isEmpty())
 					q.offer(null);
@@ -38,14 +38,14 @@ public class SiblingOpperation {
 	public static void fillNextSiblings2(SiblingBinaryTreeNode root) {
 		if(root == null)
 			return;
-		if(root.getLeft() != null)
-			root.getLeft().setNextSibling(root.getRight());
-		if(root.getRight() != null)
+		if(root.left != null)
+			root.left.setNextSibling(root.right);
+		if(root.right != null)
 			if(root.getNextSibling() != null)
-				root.getRight().setNextSibling(root.getNextSibling().getLeft());
+				root.right.setNextSibling(root.getNextSibling().left);
 			else
-				root.getRight().setNextSibling(null);
-		fillNextSiblings2(root.getLeft());
+				root.right.setNextSibling(null);
+		fillNextSiblings2(root.left);
 	}
 
 
@@ -62,22 +62,22 @@ public class SiblingOpperation {
 		SiblingBinaryTreeNode temp = root;
 
 		while(temp!= null){
-			if(temp.getLeft()!= null) {
+			if(temp.left!= null) {
 				if(rightMostNode == null) {
-					rightMostNode = temp.getLeft();
-					nextHead = temp.getLeft();
+					rightMostNode = temp.left;
+					nextHead = temp.left;
 				} else {
-					rightMostNode.setNextSibling(temp.getLeft());
+					rightMostNode.setNextSibling(temp.left);
 					rightMostNode = rightMostNode.getNextSibling();
 				}
 			}
 
-			if(temp.getRight()!= null) {
+			if(temp.right!= null) {
 				if(rightMostNode == null) {
-					rightMostNode = temp.getRight();
-					nextHead = temp.getRight();
+					rightMostNode = temp.right;
+					nextHead = temp.right;
 				} else {
-					rightMostNode.setNextSibling(temp.getRight());
+					rightMostNode.setNextSibling(temp.right);
 					rightMostNode = rightMostNode.getNextSibling();
 				}
 			}

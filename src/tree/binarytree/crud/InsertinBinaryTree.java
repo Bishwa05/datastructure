@@ -15,16 +15,16 @@ public class InsertinBinaryTree {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			if(curr != null) {
-				if(curr.getLeft() != null)
-					q.offer(curr.getLeft());
+				if(curr.left != null)
+					q.offer(curr.left);
 				else {
-					curr.setLeft(new BinaryTreeNode(data));
+					curr.left = new BinaryTreeNode(data);
 					return root;
 				}
-				if(curr.getRight() != null)
-					q.offer(curr.getRight());
+				if(curr.right != null)
+					q.offer(curr.right);
 				else {
-					curr.setRight(new BinaryTreeNode(data));
+					curr.right = new BinaryTreeNode(data);
 					return root;
 				}
 			}
@@ -44,15 +44,15 @@ public class InsertinBinaryTree {
 
 	private void insertHelperRec(BinaryTreeNode root, int data) {
 		// TODO Auto-generated method stub
-		if(root.getLeft() == null) {
-			root.setLeft(new BinaryTreeNode(data));
+		if(root.left == null) {
+			root.left = new BinaryTreeNode(data);
 		} else {
-			insertHelperRec(root.getLeft(), data);
+			insertHelperRec(root.left, data);
 		}
-		if(root.getRight() == null) {
-			root.setRight(new BinaryTreeNode(data));
+		if(root.right == null) {
+			root.right = new BinaryTreeNode(data);
 		} else {
-			insertHelperRec(root.getRight(), data);
+			insertHelperRec(root.right, data);
 		}
 	}
 }

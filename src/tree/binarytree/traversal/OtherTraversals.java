@@ -22,11 +22,11 @@ public class OtherTraversals {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			if(curr !=  null) {
-				currlvl.add(curr.getData());
-				if(curr.getLeft() != null)
-					q.add(curr.getLeft());
-				if (curr.getRight() != null)
-					q.add(curr.getRight());
+				currlvl.add(curr.data);
+				if(curr.left != null)
+					q.add(curr.left);
+				if (curr.right != null)
+					q.add(curr.right);
 			} else {
 				ArrayList<Integer> copyCurrLvl = new ArrayList<Integer>();
 				copyCurrLvl.addAll(currlvl);
@@ -59,15 +59,15 @@ public class OtherTraversals {
 		
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
-			if(curr.getLeft() != null)
-				q.offer(curr.getLeft());
-			if(curr.getRight() != null)
-				q.offer(curr.getRight());
+			if(curr.left != null)
+				q.offer(curr.left);
+			if(curr.right != null)
+				q.offer(curr.right);
 			s.push(curr);
 		}
 		
 		while(!s.isEmpty())
-			System.out.println(s.pop().getData()+"");
+			System.out.println(s.pop().data+"");
 	}
 	
 	public ArrayList<ArrayList<Integer>> zigZagLvlOrder(BinaryTreeNode root){
@@ -82,11 +82,11 @@ public class OtherTraversals {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			if(curr != null) {
-				currList.add(curr.getData());
-				if(curr.getLeft() != null)
-					q.offer(curr.getLeft());
-				if(curr.getRight() != null)
-					q.offer(curr.getRight());
+				currList.add(curr.data);
+				if(curr.left != null)
+					q.offer(curr.left);
+				if(curr.right != null)
+					q.offer(curr.right);
 			} else {
 				if(leftToRight) {
 					ArrayList<Integer> cCurrList = new ArrayList<>(currList);

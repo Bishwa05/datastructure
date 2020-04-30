@@ -8,9 +8,9 @@ public class PostOrderTraversal {
 	
 	public void postOrderRec(BinaryTreeNode root) {
 		if(root != null) {
-			postOrderRec(root.getRight());
-			postOrderRec(root.getLeft());
-			System.out.println(root.getData());
+			postOrderRec(root.right);
+			postOrderRec(root.left);
+			System.out.println(root.data);
 		}
 	}
 	
@@ -24,16 +24,16 @@ public class PostOrderTraversal {
 			
 			while(!s.isEmpty()) {
 				BinaryTreeNode curr = s.peek();
-				if(prev==null || prev.getLeft() == curr || prev.getRight() == curr) {
-					if(curr.getLeft() != null)
-						s.push(curr.getLeft());
-					else if(curr.getRight() != null)
-						s.push(curr.getRight());		
-				} else if(curr.getLeft() ==prev) {
-					if(curr.getRight() != null)
-						s.push(curr.getRight());
+				if(prev==null || prev.left == curr || prev.right == curr) {
+					if(curr.left != null)
+						s.push(curr.left);
+					else if(curr.right != null)
+						s.push(curr.right);		
+				} else if(curr.left ==prev) {
+					if(curr.right != null)
+						s.push(curr.right);
 				} else {
-					System.out.println(curr.getData());
+					System.out.println(curr.data);
 					s.pop();
 				}
 				prev = curr;

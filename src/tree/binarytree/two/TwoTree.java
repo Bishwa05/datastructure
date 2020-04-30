@@ -38,4 +38,5 @@ public class TwoTree {
 		else
 			return areMirrors(root1.getLeft(), root2.getRight()) && areMirrors(root1.getRight(), root2.getLeft());
 	}
+
 }

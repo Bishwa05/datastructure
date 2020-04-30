@@ -15,12 +15,12 @@ public class LeafOps {
 		q.offer(root);
 		while(!q.isEmpty()) {
 			BinaryTreeNode tmp = q.poll();
-			if(tmp.getLeft() == null && tmp.getRight() == null)
+			if(tmp.left == null && tmp.right == null)
 				count++;
-			if(tmp.getLeft() != null)
-				q.offer(tmp.getLeft());
-			if(tmp.getRight() != null)
-				q.offer(tmp.getRight());
+			if(tmp.left != null)
+				q.offer(tmp.left);
+			if(tmp.right != null)
+				q.offer(tmp.right);
 		}
 		return count;
 	}
@@ -33,12 +33,12 @@ public class LeafOps {
 		q.offer(root);
 		while(!q.isEmpty()) {
 			BinaryTreeNode tmp = q.poll();
-			if(tmp.getLeft() != null && tmp.getRight() !=null)
+			if(tmp.left != null && tmp.right !=null)
 				count++;
-			if(tmp.getLeft() != null)
-				q.offer(tmp.getLeft());
-			if(tmp.getRight() != null)
-				q.offer(tmp.getRight());
+			if(tmp.left != null)
+				q.offer(tmp.left);
+			if(tmp.right != null)
+				q.offer(tmp.right);
 		}
 		return count;
 	}
@@ -51,13 +51,13 @@ public class LeafOps {
 		q.offer(root);
 		while(!q.isEmpty()) {
 			BinaryTreeNode tmp = q.poll();
-			if((tmp.getLeft() == null && tmp.getRight() !=null)||
-					(tmp.getLeft() != null && tmp.getRight() ==null))
+			if((tmp.left == null && tmp.right !=null)||
+					(tmp.left != null && tmp.right ==null))
 				count++;
-			if(tmp.getLeft() != null)
-				q.offer(tmp.getLeft());
-			if(tmp.getRight() != null)
-				q.offer(tmp.getRight());
+			if(tmp.left != null)
+				q.offer(tmp.left);
+			if(tmp.right != null)
+				q.offer(tmp.right);
 		}
 		return count;
 	}
@@ -76,12 +76,12 @@ public class LeafOps {
 		pathLen++;
 		
 		// its a leaf. So print the path that led to here
-		if(root.getLeft() == null && root.getRight() == null) {
+		if(root.left == null && root.right == null) {
 			printArray(path, pathLen);
 		} else {
 			// otherwise try both subtrees
-			printPaths(root.getLeft(), path, pathLen);
-			printPaths(root.getRight(), path, pathLen);
+			printPaths(root.left, path, pathLen);
+			printPaths(root.right, path, pathLen);
 		}
 	}
 	
@@ -97,10 +97,10 @@ public class LeafOps {
 	public boolean hasPathSum(BinaryTreeNode root, int sum) {
 		if(root == null)
 			return false;
-		if(root.getLeft() == null && root.getRight() == null && root.getData() == sum)
+		if(root.left == null && root.right == null && root.getData() == sum)
 			return true;
 		else
-			return hasPathSum(root.getLeft(), sum-root.getData()) || hasPathSum(root.getRight(), sum -root.getData());
+			return hasPathSum(root.left, sum-root.getData()) || hasPathSum(root.right, sum -root.getData());
 	}
 	
 	// find sum of all elements in a binary tree
@@ -108,7 +108,7 @@ public class LeafOps {
 		if(root == null)
 			return 0;
 		else
-			return(root.getData()+addBTRec(root.getLeft())+addBTRec(root.getRight()));
+			return(root.getData()+addBTRec(root.left)+addBTRec(root.right));
 	}
 	
 	// find sum of all elements in a binary tree itr
@@ -122,10 +122,10 @@ public class LeafOps {
 			BinaryTreeNode curr = q.poll();
 			if(curr != null) {
 				sum+= curr.getData();
-				if(curr.getLeft() != null)
-					q.offer(curr.getLeft());
-				if(curr.getRight() != null)
-					q.offer(curr.getRight());
+				if(curr.left != null)
+					q.offer(curr.left);
+				if(curr.right != null)
+					q.offer(curr.right);
 			}
 		}
 		return sum;
@@ -138,8 +138,8 @@ public class LeafOps {
 	public static boolean printAllAncestors(BinaryTreeNode root, BinaryTreeNode node) {
 		if(root == null)
 			return false;
-		if(root.getLeft() == node || root.getRight() == node ||
-				printAllAncestors(root.getLeft(), node)|| printAllAncestors(root.getRight(), node)) {
+		if(root.left == node || root.right == node ||
+				printAllAncestors(root.left, node)|| printAllAncestors(root.right, node)) {
 			System.out.println(root.getData());
 			return true;
 		}
@@ -155,8 +155,8 @@ public class LeafOps {
 			return root;
 		if(root ==a || root==b)
 			return root;
-		left = LCA(root.getLeft(), a, b);
-		right = LCA(root.getRight(), a, b);
+		left = LCA(root.left, a, b);
+		right = LCA(root.right, a, b);
 		if(left != null && right != null)
 			return root; //nodes are each on a separate branch
 		else

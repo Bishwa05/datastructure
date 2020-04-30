@@ -29,8 +29,8 @@ public class CreateTree {
 			if(inOrder[offset]== data)
 				break;
 		}
-		curr.setLeft(buildBT(preOrder, preStart+1, preStart+offset-inStart, inOrder, inStart, offset-1));
-		curr.setRight(buildBT(preOrder, preStart+offset-inStart+1, preEnd, inOrder, offset+1, inEnd));
+		curr.left = buildBT(preOrder, preStart+1, preStart+offset-inStart, inOrder, inStart, offset-1);
+		curr.right =buildBT(preOrder, preStart+offset-inStart+1, preEnd, inOrder, offset+1, inEnd);
 		return curr;
 	}
 	
@@ -55,8 +55,8 @@ public class CreateTree {
 				break;
 		}
 		
-		curr.setLeft(buildBT2(postOrder,postStart,postStart+offset-inStart-1, inOrder,inStart,offset-1));
-		curr.setRight(buildBT2(postOrder, postStart+offset-inStart, postEnd-1, inOrder, offset+1, inEnd));
+		curr.left = buildBT2(postOrder,postStart,postStart+offset-inStart-1, inOrder,inStart,offset-1);
+		curr.right = buildBT2(postOrder, postStart+offset-inStart, postEnd-1, inOrder, offset+1, inEnd);
 		return curr;
 	}
 	
@@ -102,8 +102,8 @@ public class CreateTree {
 			for(BinaryTreeNode  left: generateTrees(start, i-1)) {
 				for(BinaryTreeNode right: generateTrees(i+1, end)) {
 					BinaryTreeNode tmp = new BinaryTreeNode(i);
-					tmp.setLeft(left);
-					tmp.setRight(right);
+					tmp.left= left;
+					tmp.right =right;
 					subTrees.add(tmp);
 				}
 			}

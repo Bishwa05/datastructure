@@ -11,16 +11,16 @@ public class SearchElement {
 		int max = Integer.MIN_VALUE;
 		
 		if(root != null) {
-			int leftMax = maxInBinaryTreeRec(root.getLeft());
-			int rightMax = maxInBinaryTreeRec(root.getRight());
+			int leftMax = maxInBinaryTreeRec(root.left);
+			int rightMax = maxInBinaryTreeRec(root.right);
 			
 			if(leftMax>rightMax)
 				max = leftMax;
 			else
 				max = rightMax;
 			
-			if(root.getData()>max)
-				max = root.getData();
+			if(root.data>max)
+				max = root.data;
 		}
 		return max;
 	}
@@ -36,13 +36,13 @@ public class SearchElement {
 		q.offer(root);
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
-			if(curr.getData()>max)
-				max = curr.getData();
+			if(curr.data>max)
+				max = curr.data;
 			if(curr != null) {
-				if(curr.getLeft() != null)
-					curr = curr.getLeft();
-				if(curr.getRight() != null)
-					curr= curr.getRight();
+				if(curr.left != null)
+					curr = curr.left;
+				if(curr.right != null)
+					curr= curr.right;
 			}
 		}
 		return max;
@@ -58,9 +58,9 @@ public class SearchElement {
 	public boolean findInBinaryTreeRec(BinaryTreeNode root, int data) {
 		if(root == null)
 			return false;
-		if(root.getData() == data)
+		if(root.data == data)
 			return true;
-		return findInBinaryTreeRec(root.getLeft(), data)|| findInBinaryTreeRec(root.getRight(), data);
+		return findInBinaryTreeRec(root.left, data)|| findInBinaryTreeRec(root.right, data);
 	}
 
 	/**
@@ -76,13 +76,13 @@ public class SearchElement {
 		q.offer(root);
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
-			if(curr.getData() == data)
+			if(curr.data == data)
 				return true;
 			if(curr != null) {
-				if(curr.getLeft() != null)
-					curr= curr.getLeft();
-				if(curr.getRight() != null)
-					curr = curr.getRight();
+				if(curr.left != null)
+					curr= curr.left;
+				if(curr.right != null)
+					curr = curr.right;
 
 				((LinkedList<BinaryTreeNode>) q).push(curr);
 			}
@@ -103,10 +103,10 @@ public class SearchElement {
 		 q.offer(root);
 		 while(!q.isEmpty()) {
 			 tmp = q.poll();
-			 if(tmp.getLeft() != null)
-				 q.offer(tmp.getLeft());
-			 if(tmp.getRight() != null)
-				 q.offer(tmp.getRight());		 
+			 if(tmp.left != null)
+				 q.offer(tmp.left);
+			 if(tmp.right != null)
+				 q.offer(tmp.right);		 
 		}
 		return tmp;
 	}
@@ -128,11 +128,11 @@ public class SearchElement {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			if(curr != null) {
-				currentSum += curr.getData();
-				if(curr.getLeft() != null)
-					q.offer(curr.getLeft());
-				if (curr.getRight() != null)
-					q.offer(curr.getRight());
+				currentSum += curr.data;
+				if(curr.left != null)
+					q.offer(curr.left);
+				if (curr.right != null)
+					q.offer(curr.right);
 			}else {
 				
 				if(currentSum>maxSum)
@@ -156,8 +156,8 @@ public class SearchElement {
 		}
 		if((root1 == null && root2 !=null) || (root1 != null && root2 == null))
 			return false;
-		return (isIsomorphic(root1.getLeft(),root2.getLeft()) &&
-				isIsomorphic(root1.getRight(), root2.getRight()));
+		return (isIsomorphic(root1.left,root2.left) &&
+				isIsomorphic(root1.right, root2.right));
 	}
 
 	/**
@@ -171,10 +171,10 @@ public class SearchElement {
 		}
 		if((root1 == null && root2 !=null) || (root1 != null && root2 == null))
 			return false;
-		return  ((quasiIsomorphic(root1.getLeft(), root2.getLeft())
-		&& quasiIsomorphic(root1.getRight(), root2.getRight())) ||(
-				quasiIsomorphic(root1.getRight(), root2.getLeft()) &&
-						quasiIsomorphic(root1.getLeft(), root2.getRight())));
+		return  ((quasiIsomorphic(root1.left, root2.left)
+		&& quasiIsomorphic(root1.right, root2.right)) ||(
+				quasiIsomorphic(root1.right, root2.left) &&
+						quasiIsomorphic(root1.left, root2.right)));
 
 	}
 }

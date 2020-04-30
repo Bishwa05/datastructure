@@ -13,9 +13,9 @@ public class PreOrderTraversal {
 	
 	public void preOrderRec(BinaryTreeNode root) {
 		if(root != null) {
-			System.out.println(root.getData());
-			preOrderRec(root.getLeft());
-			preOrderRec(root.getRight());
+			System.out.println(root.data);
+			preOrderRec(root.left);
+			preOrderRec(root.right);
 		}
 	}
 	
@@ -29,10 +29,10 @@ public class PreOrderTraversal {
 			while(!s.isEmpty()) {
 				BinaryTreeNode tmp = s.pop();
 				System.out.println(tmp);
-				if(tmp.getRight() != null)
-					s.push(tmp.getRight());
-				if(tmp.getLeft() != null)
-					s.push(tmp.getLeft());
+				if(tmp.right != null)
+					s.push(tmp.right);
+				if(tmp.left != null)
+					s.push(tmp.left);
 				
 			}
 		}

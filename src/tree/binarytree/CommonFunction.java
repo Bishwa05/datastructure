@@ -9,8 +9,8 @@ import java.util.Stack;
 public class CommonFunction {
 	
 	public int sizeRec(BinaryTreeNode root) {
-		int leftCount =root.getLeft() ==null?0:sizeRec(root.getLeft());
-		int rightCount = root.getRight() == null?0:sizeRec(root.getRight());
+		int leftCount =root.left ==null?0:sizeRec(root.left);
+		int rightCount = root.right == null?0:sizeRec(root.right);
 		return 1+leftCount+rightCount;
 	}
 
@@ -23,10 +23,10 @@ public class CommonFunction {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			count++;
-			if(curr.getLeft() != null)
-				q.offer(curr.getLeft());
-			if(curr.getRight() != null)
-				q.offer(curr.getRight());
+			if(curr.left != null)
+				q.offer(curr.left);
+			if(curr.right != null)
+				q.offer(curr.right);
 		}
 		return count;
 	}
@@ -34,8 +34,8 @@ public class CommonFunction {
 	public int maxDepthRec(BinaryTreeNode root) {
 		if (root == null)
 			return 0;
-		int leftDepth = maxDepthRec(root.getLeft());
-		int rightDepth = maxDepthRec(root.getRight());
+		int leftDepth = maxDepthRec(root.left);
+		int rightDepth = maxDepthRec(root.right);
 		return (leftDepth > rightDepth) ? leftDepth+1: rightDepth+1;
 	}
 	
@@ -48,12 +48,12 @@ public class CommonFunction {
 		BinaryTreeNode prev = null;
 		while(!s.isEmpty()) {
 			BinaryTreeNode curr = s.peek();
-			if(prev == null|| prev.getLeft() == curr ||  prev.getRight()== curr) {
-				if(curr.getLeft() != null) s.push(curr.getLeft());
-				else if(curr.getRight() != null) s.push(curr.getRight());
+			if(prev == null|| prev.left == curr ||  prev.right== curr) {
+				if(curr.left != null) s.push(curr.left);
+				else if(curr.right != null) s.push(curr.right);
 				
-			} else if(curr.getLeft() == prev) {
-				if(curr.getRight() != null) s.push(curr.getRight());
+			} else if(curr.left == prev) {
+				if(curr.right != null) s.push(curr.right);
 			}else {
 				s.pop();
 			}
@@ -78,14 +78,14 @@ public class CommonFunction {
 			BinaryTreeNode curr = q.poll();
 			
 			if(curr != null) {
-				if(curr.getLeft() == null && curr.getRight() == null) {
+				if(curr.left == null && curr.right == null) {
 					return count;
 				}
-				if(curr.getLeft() != null) {
-					q.offer(curr.getLeft());
+				if(curr.left != null) {
+					q.offer(curr.left);
 				}
-				if(curr.getRight() != null) {
-					q.offer(curr.getRight());
+				if(curr.right != null) {
+					q.offer(curr.right);
 				}
 			}else {
 				if(!q.isEmpty()) {
@@ -111,14 +111,14 @@ public class CommonFunction {
 			BinaryTreeNode curr = q.poll();
 			
 			if(curr != null) {
-				if(curr.getLeft() == null && curr.getRight() == null) {
+				if(curr.left == null && curr.right == null) {
 					return count;
 				}
-				if(curr.getLeft() != null) {
-					q.offer(curr.getLeft());
+				if(curr.left != null) {
+					q.offer(curr.left);
 				}
-				if(curr.getRight() != null) {
-					q.offer(curr.getRight());
+				if(curr.right != null) {
+					q.offer(curr.right);
 				}
 			}else {
 				if(!q.isEmpty()) {
@@ -135,10 +135,10 @@ public class CommonFunction {
 		if(root ==null) return 0;
 		
 		// the path goes through root
-		int len1 = height(root.getLeft())+ height(root.getRight())+3;
+		int len1 = height(root.left)+ height(root.right)+3;
 		
 		// the path does not pass through root
-		int len2 = diameter(root.getLeft())+ diameter(root.getRight());
+		int len2 = diameter(root.left)+ diameter(root.right);
 		
 		return Math.max(len1, len2);
 	}
@@ -148,8 +148,8 @@ public class CommonFunction {
 			return 0;
 		
 		//compute the depth of each subtree
-		int leftDepth = height(root.getLeft());
-		int rightDepth = height(root.getRight());
+		int leftDepth = height(root.left);
+		int rightDepth = height(root.right);
 		return (leftDepth> rightDepth)? leftDepth+1: rightDepth+1;
 	}
 
@@ -164,8 +164,8 @@ public class CommonFunction {
 			return 0;
 
 		int leftH, rightH;
-		leftH = height(root.getLeft(), x);
-		rightH = height(root.getRight(), x);
+		leftH = height(root.left, x);
+		rightH = height(root.right, x);
 
 		x.h = Math.max(x.h,1+leftH+rightH);
 
@@ -199,7 +199,7 @@ public class CommonFunction {
 			if(depth == 0)
 				return 1;
 			else
-				return width(root.getLeft(), depth-1)+ width(root.getRight(), depth-1);
+				return width(root.left, depth-1)+ width(root.right, depth-1);
 	}
 	
 	/*
@@ -212,14 +212,14 @@ public class CommonFunction {
 	 */
 	
 	public static void vSum(HashMap<Integer, Integer> hash, BinaryTreeNode root, int c) {
-		if(root.getLeft() != null)
-			vSum(hash,root.getLeft(), c-1);
-		if(root.getRight() != null)
-			vSum(hash,root.getRight(), c+1);
+		if(root.left != null)
+			vSum(hash,root.left, c-1);
+		if(root.right != null)
+			vSum(hash,root.right, c+1);
 		int data = 0;
 		if(hash.containsKey(c))
 			data = hash.get(c);
-		hash.put(c, root.getData()+data);
+		hash.put(c, root.data +data);
 	}
 	
 	public static void verticalSum(BinaryTreeNode root) {

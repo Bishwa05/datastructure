@@ -14,17 +14,17 @@ public class FindHasPathSumFromRoot {
         if(node == null)
             return sum == 0;
         else {
-            int subSum = sum - node.getData();
+            int subSum = sum - node.data;
 
-            if(subSum ==0 && node.getLeft() == null && node.getRight() == null) {
+            if(subSum ==0 && node.left == null && node.right == null) {
                 return true;
             }
 
-            if(node.getLeft() != null) {
-                ans = ans || hasSumPath(node.getLeft(), subSum);
+            if(node.left != null) {
+                ans = ans || hasSumPath(node.left, subSum);
             }
-            if(node.getRight() != null) {
-                ans = ans || hasSumPath(node.getRight(), subSum);
+            if(node.right != null) {
+                ans = ans || hasSumPath(node.right, subSum);
             }
         return ans;
         }
@@ -51,12 +51,12 @@ public class FindHasPathSumFromRoot {
         BinaryTreeNode left21 = new BinaryTreeNode(9);
         BinaryTreeNode right21 = new BinaryTreeNode(4);
 
-        left.setLeft(left11);
-        left.setRight(right11);
-        right.setLeft(left21);
-        right.setRight(right21);
-        root.setLeft(left);
-        root.setRight(right);
+        left.left = left11;
+        left.right = right11;
+        right.left =left21;
+        right.right = right21;
+        root.left = left;
+        root.right = right;
 
         return root;
     }

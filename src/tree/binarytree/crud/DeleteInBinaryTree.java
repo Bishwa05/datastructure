@@ -21,25 +21,25 @@ public class DeleteInBinaryTree {
 	public static BinaryTreeNode removeHalfNodes(BinaryTreeNode root) {
 		if(root == null)
 			return null;
-		root.setLeft(removeHalfNodes(root.getLeft()));
-		root.setRight(removeHalfNodes(root.getRight()));
-		if(root.getLeft() == null && root.getRight() == null)
+		root.left = removeHalfNodes(root.left);
+		root.right = removeHalfNodes(root.right);
+		if(root.left == null && root.right == null)
 			return root;
-		if(root.getLeft() == null)
-			return root.getRight();
-		if(root.getRight() == null)
-			return root.getLeft();
+		if(root.left == null)
+			return root.right;
+		if(root.right == null)
+			return root.left;
 		return root;
 	}
 
 
 	public static void main(String arg[]){
 		BinaryTreeNode root = new BinaryTreeNode(5);
-		root.setLeft(new BinaryTreeNode(4));
-		root.setRight(new BinaryTreeNode(6));
-		root.getRight().setRight(new BinaryTreeNode(8));
-		root.getRight().setLeft(new BinaryTreeNode(7));
-		root.getRight().getRight().setRight(new BinaryTreeNode(9));
+		root.left = new BinaryTreeNode(4);
+		root.right = new BinaryTreeNode(6);
+		root.right.right = new BinaryTreeNode(8);
+		root.right.left = new BinaryTreeNode(7);
+		root.right.right.right = new BinaryTreeNode(9);
 		root = removeHalfNodes(root);
 		System.out.println(root);
 	}
@@ -49,11 +49,11 @@ public class DeleteInBinaryTree {
 	 */
 	public BinaryTreeNode removeLeaves(BinaryTreeNode root) {
 		if(root != null) {
-			if(root.getLeft() == null && root.getRight() == null){
+			if(root.left == null && root.right == null){
 				root = null;
 			} else {
-				root.setLeft(removeLeaves(root.getLeft()));
-				root.setRight(removeLeaves(root.getRight()));
+				root.left= removeLeaves(root.left);
+				root.right = removeLeaves(root.right);
 			}
 		}
 		return root;
