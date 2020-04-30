@@ -2,10 +2,10 @@ package tree.binarytree;
 
 public class SiblingBinaryTreeNode {
 	
-	private int data;
-	private SiblingBinaryTreeNode left;
-	private SiblingBinaryTreeNode right;
-	private SiblingBinaryTreeNode nextSibling;
+	public int data;
+	public SiblingBinaryTreeNode left;
+	public SiblingBinaryTreeNode right;
+	public SiblingBinaryTreeNode nextSibling;
 	
 	public SiblingBinaryTreeNode(int data) {
 		this.data = data;

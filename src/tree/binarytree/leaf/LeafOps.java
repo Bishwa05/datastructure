@@ -72,7 +72,7 @@ public class LeafOps {
 		if(root == null)
 			return;
 		//append this node to path array
-		path[pathLen] = root.getData();
+		path[pathLen] = root.data;
 		pathLen++;
 		
 		// its a leaf. So print the path that led to here
@@ -97,10 +97,10 @@ public class LeafOps {
 	public boolean hasPathSum(BinaryTreeNode root, int sum) {
 		if(root == null)
 			return false;
-		if(root.left == null && root.right == null && root.getData() == sum)
+		if(root.left == null && root.right == null && root.data == sum)
 			return true;
 		else
-			return hasPathSum(root.left, sum-root.getData()) || hasPathSum(root.right, sum -root.getData());
+			return hasPathSum(root.left, sum-root.data) || hasPathSum(root.right, sum -root.data);
 	}
 	
 	// find sum of all elements in a binary tree
@@ -108,7 +108,7 @@ public class LeafOps {
 		if(root == null)
 			return 0;
 		else
-			return(root.getData()+addBTRec(root.left)+addBTRec(root.right));
+			return(root.data+addBTRec(root.left)+addBTRec(root.right));
 	}
 	
 	// find sum of all elements in a binary tree itr
@@ -121,7 +121,7 @@ public class LeafOps {
 		while(!q.isEmpty()) {
 			BinaryTreeNode curr = q.poll();
 			if(curr != null) {
-				sum+= curr.getData();
+				sum+= curr.data;
 				if(curr.left != null)
 					q.offer(curr.left);
 				if(curr.right != null)
@@ -140,7 +140,7 @@ public class LeafOps {
 			return false;
 		if(root.left == node || root.right == node ||
 				printAllAncestors(root.left, node)|| printAllAncestors(root.right, node)) {
-			System.out.println(root.getData());
+			System.out.println(root.data);
 			return true;
 		}
 		return false;

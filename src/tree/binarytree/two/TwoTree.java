@@ -9,20 +9,20 @@ public class TwoTree {
 			return true;
 		if(root1 ==null || root2 == null)
 			return false;
-		return checkStructurallySame(root1.getLeft(), root2.getRight()) &&
-				checkStructurallySame(root1.getRight(), root2.getLeft());
+		return checkStructurallySame(root1.left, root2.right) &&
+				checkStructurallySame(root1.right, root2.left);
 	}
 	
 	//Convert a tree to its mirror tree
 	public BinaryTreeNode mirrorOfBinaryTree(BinaryTreeNode root) {
 		BinaryTreeNode tmp;
 		if(root != null) {
-			mirrorOfBinaryTree(root.getLeft());
-			mirrorOfBinaryTree(root.getRight());
+			mirrorOfBinaryTree(root.left);
+			mirrorOfBinaryTree(root.right);
 			//Swap the pointers in this node
-			tmp = root.getLeft();
-			root.setLeft(root.getRight());
-			root.setRight(tmp);
+			tmp = root.left;
+			root.left = root.right;
+			root.right= tmp;
 		}
 		return root;
 	}
@@ -33,10 +33,10 @@ public class TwoTree {
 			return true;
 		if(root1 == null || root2== null)
 			return false;
-		if(root1.getData() != root2.getData())
+		if(root1.data != root2.data)
 			return false;
 		else
-			return areMirrors(root1.getLeft(), root2.getRight()) && areMirrors(root1.getRight(), root2.getLeft());
+			return areMirrors(root1.left, root2.right) && areMirrors(root1.right, root2.left);
 	}
 
 }

@@ -1,10 +1,6 @@
 package tree.binarytree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class CommonFunction {
 	
@@ -226,10 +222,55 @@ public class CommonFunction {
 		HashMap<Integer, Integer> hash = new HashMap<>();
 		vSum(hash, root, 0);
 		System.out.println();
-		
+
 		for(int k: hash.keySet())
 			System.out.println(" key(pos): "+k+ " sum : "+hash.get(k)+" ");
 	}
-	
+
+	public static void verticalTraversal(Map<Integer,List> h, BinaryTreeNode curr, int c){
+		if(curr.left != null){
+			verticalTraversal(h,curr.left,c-1);
+		}
+		if(curr.right != null) {
+			verticalTraversal(h, curr.right, c+1);
+		}
+		if(h.containsKey(c)){
+			List<Integer> x = h.get(c);
+			x.add(curr.data);
+			h.put(c,x);
+		} else {
+			List<Integer> x =new ArrayList();
+			x.add(curr.data);
+			h.put(c, x);
+		}
+	}
+
+
+	public static void verticalTraversal(BinaryTreeNode root) {
+		HashMap<Integer, List> hash = new HashMap<>();
+		verticalTraversal(hash, root, 0);
+		System.out.println();
+		List<List> result = new ArrayList<>();
+
+		for(int k: hash.keySet()) {
+			result.add(hash.get(k));
+		}
+		result.forEach(e-> e.forEach(y -> System.out.println(y)));
+
+	}
+
+	public static void main(String arg[]){
+//1,2,3,4,5,6,7
+
+		BinaryTreeNode root = new BinaryTreeNode(1);
+		root.left = new BinaryTreeNode(2);
+		root.right = new BinaryTreeNode(3);
+		root.left.left = new BinaryTreeNode(4);
+		root.left.right = new BinaryTreeNode(5);
+		root.right.left = new BinaryTreeNode(6);
+		root.right.right = new BinaryTreeNode(7);
+		verticalTraversal(root);
+	}
+
 
 }
