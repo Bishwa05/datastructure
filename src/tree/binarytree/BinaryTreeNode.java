@@ -18,11 +18,11 @@ public class BinaryTreeNode {
           this.left = left;
           this.right = right;
 	}
-//	public int getData() {
+//	public int getVal() {
 //		return data;
 //	}
 //
-//	public void setData(int data) {
+//	public void setVal(int data) {
 //		this.data = data;
 //	}
 //

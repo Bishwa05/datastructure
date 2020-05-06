@@ -14,7 +14,7 @@ public class Creation {
         ListNode currentNode = head;
         while(currentNode != null){
             len++;
-            currentNode = currentNode.getNext();
+            currentNode = currentNode.next;
         }
         return constructRec(head, 0, len-1);
 
@@ -26,13 +26,13 @@ public class Creation {
         }
         int mid = start + (end - start)/2;
 
-        BSTNode root = new BSTNode(head.getData());
+        BSTNode root = new BSTNode(head.getVal());
         BSTNode left = constructRec(head,start,mid-1);
         root.setLeft(left);
 
-        if(head.getNext() != null) {
-            head.setData(head.getNext().getData());
-            head.setNext(head.getNext().getNext());
+        if(head.next != null) {
+            head.setVal(head.next.getVal());
+            head.next = head.next.next;
         }
 
         root.setRight(constructRec(head, mid+1, end));
@@ -84,9 +84,9 @@ public class Creation {
         int i=0;
         while(i<mid){
             i++;
-            head=head.getNext();
+            head=head.next;
         }
-        return head.getData();
+        return head.getVal();
     }
 
     public  BSTNode constructBST(int[] preorder, int start, int end)

@@ -163,4 +163,43 @@ public class LeafOps {
 			return(left != null? left:right);
 		//Either 1 node is on 1 branch or none was found in any of the branches
 	}
+
+	/**
+	 * 1302. Deepest Leaves Sum
+	 * Leetcode.
+	 */
+	public int deepestLeavesSum(BinaryTreeNode root) {
+		int sum =0;
+		int finalSum = 0;
+		Queue<BinaryTreeNode> q = new LinkedList<>();
+		q.offer(root);
+		q.offer(null);
+
+		while(!q.isEmpty()){
+			BinaryTreeNode x = q.poll();
+
+			if(x!= null){
+				sum = sum+ x.data;
+				if(x.left != null){
+					q.offer(x.left);
+				}
+				if(x.right != null){
+					q.offer(x.right);
+				}
+
+			}else{
+				finalSum = sum;
+				sum=0;
+				if(!q.isEmpty()){
+					q.offer(null);
+				}
+
+			}
+
+		}
+
+		return finalSum;
+
+	}
+
 }
