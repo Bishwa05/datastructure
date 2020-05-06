@@ -18,31 +18,31 @@ public class CircularLinkedList {
         ListNode tmp = new ListNode(data);
 		if(tail == null) {
 			tail = tmp;
-			tail.setNext(tail);
+			tail.next=tail;
 		}
 	}
 	
 	public void addToTail(int data) {
 		addToHead(data);
-		tail = tail.getNext();
+		tail = tail.next;
 	}
 	
 	//Returns data at the head of list
 	public int peek() {
-		return tail.getNext().getData();
+		return tail.next.getVal();
 	}
 	
 	// remove data from head of the list
 	public int removeFromHead() {
-        ListNode tmp = tail.getNext();
-		if(tail == tail.getNext())
+        ListNode tmp = tail.next;
+		if(tail == tail.next)
 			tail = null;
 		else {
-			tail.setNext(tmp.getNext());
-			tmp.setNext(null);
+			tail.next=tmp.next;
+			tmp.next=null;
 		}
 		length --;
-		return tmp.getData();
+		return tmp.getVal();
 	}
 	
 	//remove data from tail of the list
@@ -50,55 +50,55 @@ public class CircularLinkedList {
 		if(tail == null)
 			return Integer.MIN_VALUE;
         ListNode p = tail;
-		while(p.getNext() != tail) {
-			p = p.getNext();
+		while(p.next != tail) {
+			p = p.next;
 		}
 		// p now points to second to last data
         ListNode tmp = tail;
 		if(p == tail)
 			tail = null;
 		else {
-			p.setNext(tail.getNext());
+			p.next=tail.next;
 			tail = p;
 		}
 		length--;
-		return tmp.getData();
+		return tmp.getVal();
 	}
 	
 	//Return true if the list contains data else false
 	public boolean contains(int data) {
 		if(tail == null)
 			return false;
-        ListNode p= tail.getNext();
-		while(p != tail && p.getData() != data)
-			p = p.getNext();
-		return (p.getData() == data);
+        ListNode p= tail.next;
+		while(p != tail && p.getVal() != data)
+			p = p.next;
+		return (p.getVal() == data);
 	}
 	
 	// Remove and return element == data
 	public int remove(int data) {
 		if(tail == null) return Integer.MIN_VALUE;
-        ListNode n = tail.getNext();
+        ListNode n = tail.next;
         ListNode p = tail;
 		
-		for(int i=0; i<length && (!(n.getData() == data)); i++) {
+		for(int i = 0; i<length && (!(n.getVal() == data)); i++) {
 			p = n;
-			n = n.getNext();
+			n = n.next;
 		}
 		
-		if(p.getData()== data) {
-			if(tail == tail.getNext()) {
+		if(p.getVal()== data) {
+			if(tail == tail.next) {
 				tail = null;
 				
 			} else {
 				if(n == tail)
 					tail = p;
-				p.setNext(p.getNext().getNext());
+				p.next=p.next.next;
 			}
 			//n data release
-			n.setNext(null);
+			n.next=null;
 			length--;
-			return n.getData();
+			return n.getVal();
 		} else
 			return Integer.MIN_VALUE;
 	}
@@ -117,10 +117,10 @@ public class CircularLinkedList {
 		String result ="[";
 		if(tail == null)
 			return result+"]";
-        ListNode curr = tail.getNext();
+        ListNode curr = tail.next;
 		while(curr != tail) {
-			result = result+" "+curr.getData();
-			curr= curr.getNext();
+			result = result+" "+curr.getVal();
+			curr= curr.next;
 		}
 		return result+"]";
 	}
@@ -135,27 +135,27 @@ public class CircularLinkedList {
         ListNode slowPtr= head, fastPtr = head;
 		if(head == null)
 			return;
-		while((head != fastPtr.getNext()) && (head != fastPtr.getNext().getNext())){
-			fastPtr = fastPtr.getNext().getNext();
-			slowPtr = slowPtr.getNext();
+		while((head != fastPtr.next) && (head != fastPtr.next.next)){
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
 		}
 
 		// If there are even elements in the list then move fast ptr
-		if(fastPtr.getNext().getNext() == head) {
-			fastPtr = fastPtr.getNext();
+		if(fastPtr.next.next == head) {
+			fastPtr = fastPtr.next;
 		}
 		//set the headptr of 1st half
 		head1 = head;
 
 		//set the headptr of 2nd half
-		if(head.getNext() != head)
-		head2 = slowPtr.getNext();
+		if(head.next != head)
+		head2 = slowPtr.next;
 
 		//Make the 2nd half circular
-		fastPtr.setNext(slowPtr.getNext());
+		fastPtr.next=slowPtr.next;
 
 		//Make the 1st half circular
-		slowPtr.setNext(head);
+		slowPtr.next=head;
 	}
 
 	/**
@@ -174,19 +174,19 @@ public class CircularLinkedList {
 
 		for(int i=2; i<= N; i++) {
             ListNode x = new ListNode(i);
-			p.setNext(x);
-			p = p.getNext();
+			p.next=x;
+			p = p.next;
 		}
 		//Close the circular linked list
-		p.setNext(q);
+		p.next=q;
 
 		//eliminate mth player as long as more than 1 player remains
 		for(int count =N ; count >1 ; --count){
 			for(int i=0; i<M-1; ++i)
-				p = p.getNext();
-			p.setNext(p.getNext().getNext());
+				p = p.next;
+			p.next=p.next.next;
 		}
-		System.out.println("Lat player lefty standing, Josephus position "+p.getData());
+		System.out.println("Lat player lefty standing, Josephus position "+p.getVal());
 		return p;
 	}
 }

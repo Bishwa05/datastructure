@@ -14,15 +14,15 @@ public class SearchInList {
 		
 		for(int i =0; i<n; i++) {
 			if(curr != null)
-				curr = curr.getNext();
+				curr = curr.next;
 		}
 		
 		while(curr != null) {
 			if(nthNode == null)
 				nthNode = head;
 			else
-				nthNode = nthNode.getNext();
-			curr = curr.getNext();
+				nthNode = nthNode.next;
+			curr = curr.next;
 		}
 		
 		if(nthNode != null)
@@ -32,7 +32,7 @@ public class SearchInList {
 	
 	public ListNode nthNodeFromEndRec(ListNode head, int n, int count) {
 		if(head != null)
-			nthNodeFromEndRec(head.getNext(), n, count);
+			nthNodeFromEndRec(head.next, n, count);
 		count++;
 		if(n == count)
 			return head;
@@ -48,9 +48,9 @@ public class SearchInList {
 	public static boolean findIfLoopExistsUsingFloyd(ListNode head) {
 		ListNode fastPtr = head;
 		ListNode slowPtr = head;
-		while(fastPtr != null && fastPtr.getNext() != null) {
-			fastPtr = fastPtr.getNext().getNext();
-			slowPtr = slowPtr.getNext();
+		while(fastPtr != null && fastPtr.next != null) {
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
 			if(slowPtr==fastPtr)
 				return true;
 		}
@@ -65,9 +65,9 @@ public class SearchInList {
 		ListNode fastPtr = head;
 		ListNode slowPtr = head;
 		boolean loopExists = false;
-		while(fastPtr != null && fastPtr.getNext() != null) {
-			fastPtr = fastPtr.getNext().getNext();
-			slowPtr = slowPtr.getNext();
+		while(fastPtr != null && fastPtr.next != null) {
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
 			if(slowPtr==fastPtr) {
 				loopExists= true;
 				break;
@@ -77,8 +77,8 @@ public class SearchInList {
 		if(loopExists) {
 			slowPtr = head;
 			while(slowPtr != fastPtr) {
-				slowPtr = slowPtr.getNext();
-				fastPtr = fastPtr.getNext();
+				slowPtr = slowPtr.next;
+				fastPtr = fastPtr.next;
 			}
 			return fastPtr;
 		} 
@@ -96,9 +96,9 @@ public class SearchInList {
 		ListNode slowPtr = head;
 		boolean ifLoopExists = false;
 		
-		while(fastPtr != null && fastPtr.getNext() != null) {
-			fastPtr = fastPtr.getNext().getNext();
-			slowPtr = slowPtr.getNext();
+		while(fastPtr != null && fastPtr.next != null) {
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
 			if(slowPtr == fastPtr) {
 				ifLoopExists = true;
 				break;
@@ -107,7 +107,7 @@ public class SearchInList {
 		int length =0;
 		if(ifLoopExists) {
 			while(slowPtr != fastPtr) {
-				slowPtr = slowPtr.getNext();
+				slowPtr = slowPtr.next;
 				length++;
 			}
 		}
@@ -137,12 +137,12 @@ public class SearchInList {
 		ListNode head1 = node1, head2 = node2;
 		while(head1 != null) {
 			l1++;
-			head1 = head1.getNext();
+			head1 = head1.next;
 		}
 		
 		while(head2 != null) {
 			l2++;
-			head2 = head2.getNext();
+			head2 = head2.next;
 		}
 		
 		if(l1< l2) {
@@ -155,12 +155,12 @@ public class SearchInList {
 		}
 		
 		for(int i=0; i< diff; i++)
-			head1 = head1.getNext();
+			head1 = head1.next;
 		while(head1 != null && head2 != null) {
 			if(head1 == head2)
 				return head1;
-			head1 = head1.getNext();
-			head2 = head2.getNext();
+			head1 = head1.next;
+			head2 = head2.next;
 		}
 		return null;
 	}
@@ -181,18 +181,18 @@ public class SearchInList {
 		int i=0;
 		int j =0;
 
-		while(ptr1x.getNext() != null){
+		while(ptr1x.next != null){
 			if(i==0) {
-				ptr1x = ptr1x.getNext();
+				ptr1x = ptr1x.next;
 				i=1;
 			} else if(i==1){
-				ptr1x = ptr1x.getNext();
-				ptr2x = ptr2x.getNext();
+				ptr1x = ptr1x.next;
+				ptr2x = ptr2x.next;
 				i=0;
 			}
 			j++;
 		}
-		return (j%2==0)?ptr2x:ptr2x.getNext();
+		return (j%2==0)?ptr2x:ptr2x.next;
 	}
 
 	/**
@@ -204,9 +204,9 @@ public class SearchInList {
 	 */
 	public static ListNode findMiddle2(ListNode head){
 		ListNode slow = head, fast = head;
-		while (fast != null && fast.getNext() != null) {
-			slow = slow.getNext();
-			fast = fast.getNext().getNext();
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
 		}
 		return slow;
 	}
@@ -236,7 +236,7 @@ public class SearchInList {
 				mod = head;
 			}
 			i++;
-			head = head.getNext();
+			head = head.next;
 		}
 		return mod;
 	}
@@ -269,7 +269,7 @@ public class SearchInList {
 			if(i%k ==0)
 				fracNode = head;
 			i++;
-			head = head.getNext();
+			head = head.next;
 		}
 		return fracNode;
 	}

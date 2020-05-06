@@ -1,9 +1,7 @@
 package linklist.singly.traversal;
 
-import linklist.singly.LinkedList;
 import linklist.singly.ListNode;
 
-import java.util.Queue;
 import java.util.Stack;
 
 public class Traversal {
@@ -16,7 +14,7 @@ public class Traversal {
 		ListNode curr = head;
 		while(curr != null) {
 			length++;
-			curr= curr.getNext();
+			curr= curr.next;
 		}
 		
 		return length;
@@ -31,12 +29,12 @@ public class Traversal {
 		ListNode curr = head;
 		if(head == null) return newNode;
 		//traverse until encounter bigger node
-		while(curr != null && curr.getData()< newNode.getData())
-			curr = curr.getNext();
+		while(curr != null && curr.getVal()< newNode.getVal())
+			curr = curr.next;
 		if(curr != null) {
-			ListNode tmp = curr.getNext();
-			newNode.setNext(tmp);
-			curr.setNext(newNode);
+			ListNode tmp = curr.next;
+			newNode.next=tmp;
+			curr.next=newNode;
 		}
 		return head;
 	}
@@ -49,8 +47,8 @@ public class Traversal {
 		ListNode curr = head;
 		ListNode prev = null;
 		while(curr != null) {
-			ListNode next = curr.getNext();
-			curr.setNext(prev);
+			ListNode next = curr.next;
+			curr.next=prev;
 			prev=curr;
 			curr=next;
 		}
@@ -63,14 +61,14 @@ public class Traversal {
 	public void reverseListRec(ListNode curr, ListNode[] head) {
 	if(curr == null)
 		return;
-	ListNode next = curr.getNext();
+	ListNode next = curr.next;
 	if(next == null) {
 		head[0] = curr;
 		return;
 	}
 	reverseListRec(next, head);
-	next.setNext(curr);
-	curr.setNext(null);
+	next.next=curr;
+	curr.next=null;
 	}
 
 	/*
@@ -82,8 +80,8 @@ public class Traversal {
 		if(head == null)
 			return;
 
-		printListFromEnd(head.getNext());
-		System.out.println(head.getData());
+		printListFromEnd(head.next);
+		System.out.println(head.getVal());
 	}
 
 
@@ -93,8 +91,8 @@ public class Traversal {
 	 * Time O(n) space O(1)
 	 */
 	public int isLinkedListLengthEven(ListNode head) {
-		while(head != null && head.getNext() != null)
-			head = head.getNext().getNext();
+		while(head != null && head.next != null)
+			head = head.next.next;
 		if(head == null)
 			return 0;
 		return 1;
@@ -110,12 +108,12 @@ public class Traversal {
 		if (head2 == null)
 			return head1;
 		ListNode head = new ListNode(0);
-		if(head1.getData() <= head2.getData()) {
+		if(head1.getVal() <= head2.getVal()) {
 			head = head1;
-			head.setNext(mergeTwoListsRec(head1.getNext(), head2));
+			head.next=mergeTwoListsRec(head1.next, head2);
 		} else {
 			head = head2;
-			head.setNext(mergeTwoListsRec(head1, head2.getNext()));
+			head.next=mergeTwoListsRec(head1, head2.next);
 		}
 		return head;
 	}
@@ -130,21 +128,21 @@ public class Traversal {
 		ListNode curr = head;
 
 		while(head1 != null && head2 != null) {
-			if(head1.getData() < head2.getData()){
-				curr.setNext(head1);
-				head1 = head1.getNext();
+			if(head1.getVal() < head2.getVal()){
+				curr.next=head1;
+				head1 = head1.next;
 			} else {
-				curr.setNext(head2);
-				head2= head2.getNext();
+				curr.next=head2;
+				head2= head2.next;
 			}
 		}
 
 		if(head1 != null){
-			curr.setNext(head1);
+			curr.next=head1;
 		} else if (head2 != null) {
-			curr.setNext(head2);
+			curr.next=head2;
 		}
-		return head.getNext();
+		return head.next;
 
 	}
 
@@ -155,17 +153,17 @@ public class Traversal {
 	public static ListNode reversePairRec(ListNode head){
 		ListNode temp;
 
-		if(head == null || head.getNext() == null)
+		if(head == null || head.next == null)
 			return head;
 		else {
 			//Reverse 1st pair
-			temp = head.getNext();
-			head.setNext(temp.getNext());
-			temp.setNext(head);
+			temp = head.next;
+			head.next=temp.next;
+			temp.next=head;
 			head = temp;
 
 			//Recursively compute for the rest of the list.
-			head.getNext().setNext(reversePairRec(head.getNext().getNext()));
+			head.next.next=reversePairRec(head.next.next);
 		}
 
 		return head;
@@ -179,18 +177,18 @@ public class Traversal {
 		ListNode temp1 = null;
 		ListNode temp2 = null;
 
-		while (head != null && head.getNext() != null) {
+		while (head != null && head.next != null) {
 			if(temp1 != null) {
-				temp1.getNext().setNext(head.getNext());
+				temp1.next.next=head.next;
 			}
 
-			temp1 = head.getNext();
-			head.setNext(head.getNext().getNext());
-			temp1.setNext(head);
+			temp1 = head.next;
+			head.next=head.next.next;
+			temp1.next=head;
 
 			if(temp2 == null)
 				temp2 = temp1;
-			head = head.getNext();
+			head = head.next;
 		}
 		return temp2;
 	}
@@ -200,17 +198,17 @@ public class Traversal {
 	 */
 	public ListNode exchangeAdjacentNodes (ListNode head){
 		ListNode temp = new ListNode(0);
-		temp.setNext(head);
+		temp.next=head;
 		ListNode prev = temp, curr = head;
-		while(curr != null && curr.getNext() != null){
-			ListNode tmp = curr.getNext().getNext();
-			curr.getNext().setNext(prev.getNext());
-			prev.setNext(curr.getNext());
-			curr.setNext(tmp);
+		while(curr != null && curr.next != null){
+			ListNode tmp = curr.next.next;
+			curr.next.next=prev.next;
+			prev.next=curr.next;
+			curr.next=tmp;
 			prev = curr;
-			curr= prev.getNext();
+			curr= prev.next;
 		}
-		return temp.getNext();
+		return temp.next;
 	}
 
 	/**
@@ -235,7 +233,7 @@ public class Traversal {
 		int count = k;
 
 		while(current!= null){
-			current = current.getNext();
+			current = current.next;
 			count--;
 			if(count ==0){
 				break;
@@ -251,8 +249,8 @@ public class Traversal {
 
 		//Reverse k nodes
 		while(current != null && count >0){
-			next = current.getNext();
-			current.setNext(prev);
+			next = current.next;
+			current.next=prev;
 			prev = current;
 			current = next;
 			count--;
@@ -260,7 +258,7 @@ public class Traversal {
 
 		//Now next points to K+1th node, returns the pointer to the head node
 		if(next != null){
-			head.setNext(reverseKNodesRec(next,k));
+			head.next=reverseKNodesRec(next,k);
 		}
 		//return head node
 		return prev;
@@ -280,8 +278,8 @@ public class Traversal {
 			int count = k;
 			ListNode tail = null;
 			while (current != null && count > 0) {
-				ListNode next = current.getNext();
-				current.setNext(tail);
+				ListNode next = current.next;
+				current.next=tail;
 				tail = current;
 				current = next;
 				count--;
@@ -289,7 +287,7 @@ public class Traversal {
 			// reversed K nodes
 			if (prevTail != null) {
 				//Link this set and previous set
-				prevTail.setNext(tail);
+				prevTail.next=tail;
 			} else {
 				//we just reversed 1st set of k nodes, update the head point to kth node
 				head = tail;
@@ -321,28 +319,28 @@ public class Traversal {
 		if(head == null)
 			return;
 		ListNode sPointer = head;
-		ListNode fPointer = head.getNext();
+		ListNode fPointer = head.next;
 
-		while(fPointer != null && fPointer.getNext() != null){
-			fPointer = fPointer.getNext().getNext();
-			sPointer = sPointer.getNext();
+		while(fPointer != null && fPointer.next != null){
+			fPointer = fPointer.next.next;
+			sPointer = sPointer.next;
 		}
 		ListNode head2 = sPointer;
-		sPointer.setNext(null);
+		sPointer.next=null;
 		Stack<ListNode> stack= new Stack<>();
 
 		while(head2 != null){
 			ListNode temp= head2;
-			head2 = head2.getNext();
-			temp.setNext(null);
+			head2 = head2.next;
+			temp.next=null;
 			stack.push(temp);
 		}
 
 		while(!stack.isEmpty()) {
 			ListNode temp = stack.pop();
-			temp.setNext(head.getNext());
-			head.setNext(temp);
-			head = temp.getNext();
+			temp.next=head.next;
+			head.next=temp;
+			head = temp.next;
 		}
 	}
 

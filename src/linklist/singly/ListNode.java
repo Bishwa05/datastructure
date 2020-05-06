@@ -1,27 +1,20 @@
 package linklist.singly;
 
 public class ListNode {
-	private int data;
-	private ListNode next;
+	public int val;
+	public ListNode next;
 	
-	public ListNode(int data) {
-		this.data = data;
+	public ListNode(int val) {
+		this.val = val;
 	}
 
-	public int getData() {
-		return data;
+	public int getVal() {
+		return val;
 	}
 
-	public void setData(int data) {
-		this.data = data;
+	public void setVal(int val) {
+		this.val = val;
 	}
 
-	public ListNode getNext() {
-		return next;
-	}
-
-	public void setNext(ListNode next) {
-		this.next = next;
-	}
 	
 }

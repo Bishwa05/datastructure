@@ -13,7 +13,7 @@ public class LinkedList {
 	 * Insert at beginning
 	 */
 	public void insertAtBegining(ListNode node) {
-		node.setNext(head);
+		node.next =head;
 		head = node;
 		length++;
 	}
@@ -26,8 +26,8 @@ public class LinkedList {
 			head = node;
 		else {
 			ListNode p,q;
-			for(p =head; (q=p.getNext())!= null ; p=q);
-			p.setNext(node);
+			for(p =head; (q=p.next)!= null ; p=q);
+			p.next =node;
 		}
 		length++;
 	}
@@ -45,16 +45,16 @@ public class LinkedList {
 		
 		else if(position ==0) {
 			ListNode tmp = new ListNode(data);
-			tmp.setNext(head);
+			tmp.next=head;
 			head = tmp;
 		} else {
 			ListNode tmp = head;
 			for(int i=0; i<position; i++) {
-				tmp = tmp.getNext();
+				tmp = tmp.next;
 			}
 			ListNode newNode = new ListNode(data);
-			newNode.setNext(tmp.getNext());
-			tmp.setNext(newNode);
+			newNode.next=tmp.next;
+			tmp.next=newNode;
 		}
 		length +=1;
 		
@@ -63,8 +63,8 @@ public class LinkedList {
 	public ListNode removeFromBegin() {
 		ListNode node = head;
 		if(node != null) {
-			head = node.getNext();
-			node.setNext(null);
+			head = node.next;
+			node.next=null;
 		}
 		return node;
 	}
@@ -72,16 +72,16 @@ public class LinkedList {
 	public ListNode removeFromEnd() {
 		if(head ==null)
 			return null;
-		ListNode p = head, q= null, next = head.getNext();
+		ListNode p = head, q= null, next = head.next;
 		if(next == null) {
 			head = null;
 			return p;
 		}
-		while((next = p.getNext())!= null) {
+		while((next = p.next)!= null) {
 			q = p;
 			p = next;
 		}
-		q.setNext(null);
+		q.next=null;
 		return p;
 	}
 	
@@ -89,13 +89,13 @@ public class LinkedList {
 		if(head == null)
 			return;
 		if(node.equals(head)) {
-			head = head.getNext();
+			head = head.next;
 			return;
 		}
 		ListNode p = head, q= null;
-		while((q = p.getNext())!= null) {
+		while((q = p.next)!= null) {
 			if(node.equals(q)) {
-				p.setNext(q.getNext());
+				p.next=q.next;
 				return;
 			}
 			p=q;
@@ -110,12 +110,12 @@ public class LinkedList {
 		if(head == null)
 			return;
 		if(position ==0)
-			head = head.getNext();
+			head = head.next;
 		else {
 			ListNode tmp = head;
 			for(int i=1; i<position; i++)
-				tmp = tmp.getNext();
-			tmp.setNext(tmp.getNext().getNext());
+				tmp = tmp.next;
+			tmp.next=tmp.next.next;
 		}
 		length--;
 	}
@@ -128,8 +128,8 @@ public class LinkedList {
 			return result+"]";
 		ListNode tmp = head;
 		while(tmp != null) {
-			result = result+tmp.getData();
-			tmp = tmp.getNext();
+			result = result+tmp.getVal();
+			tmp = tmp.next;
 		}
 		
 		return result+"]";
@@ -146,10 +146,10 @@ public class LinkedList {
 		int pos =0;
 		
 		while(curr != null) {
-			if(data == curr.getData()) {
+			if(data == curr.getVal()) {
 				return pos;
 			}
-			curr = curr.getNext();
+			curr = curr.next;
 			pos++;
 		}
 		
@@ -159,5 +159,32 @@ public class LinkedList {
 	public void clearList() {
 		head = null;
 		length =0;
+	}
+
+	/**
+	 *
+	 *61. Rotate List
+	 *
+	 */
+	public ListNode rotateRight(ListNode head, int k) {
+		if (head == null) {
+			return null;
+		}
+		int size = 1;
+		ListNode p = head;
+		while(p.next != null) {
+			size ++;
+			p = p.next;
+		}
+		p.next = head;
+		p = head;
+		k = size - k % size - 1;
+		while ( k -- > 0) {
+			p = p.next;
+		}
+		head = p.next;
+		p.next = null;
+		return head;
+
 	}
 }
