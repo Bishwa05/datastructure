@@ -3,6 +3,50 @@ package tree.binarytree;
 import java.util.*;
 
 public class CommonFunction {
+
+	public boolean ifCousin(BinaryTreeNode root, BinaryTreeNode a, BinaryTreeNode b){
+		if(root == null || a == null || b == null){
+			return false;
+		}
+
+		if(getLevelOfNode(root, a.data, 1) != getLevelOfNode(root, b.data, 1)){
+			return false;
+		}
+
+		return !isSibling(root, a, b);
+	}
+
+	public int getLevelOfNode(BinaryTreeNode node, int val, int level) {
+		if(node == null) return 0;
+
+		if(node.data == val){
+			return level;
+		}
+
+		int l = getLevelOfNode(node.left, val, level+1);
+		if(l !=0){
+			return l;
+		}
+		l = getLevelOfNode(node.right, val, level+1);
+		return l;
+	}
+
+	public boolean isSibling(BinaryTreeNode root , int x, int y) {
+		if(root == null){
+			return false;
+		}
+
+		boolean a = false, b = false, c = false;
+		if(root.left != null && root.right != null)
+			a = ( (root.left.data == x && root.right.data == y) ||
+					(root.left.data == y && root.right.data == x) );
+		if(root.left != null)
+			b = isSibling(root.left, x, y);
+		if(root.right != null)
+			c = isSibling(root.right, x, y);
+		return (a || b || c);
+	}
+
 	
 	public int sizeRec(BinaryTreeNode root) {
 		int leftCount =root.left ==null?0:sizeRec(root.left);
@@ -25,6 +69,25 @@ public class CommonFunction {
 				q.offer(curr.right);
 		}
 		return count;
+	}
+
+	/**
+	 *Accepted in leetcode
+	 */
+	public int maxDepth(BinaryTreeNode root) {
+		return maxDepth(root, 1);
+
+	}
+	public int maxDepth(BinaryTreeNode node, int i) {
+		if(node == null){
+			return i-1;
+		}
+		if(node.left == null && node.right == null){
+			return i;
+		}
+
+		return Math.max(maxDepth(node.left, i+1),maxDepth(node.right, i+1));
+
 	}
 	
 	public int maxDepthRec(BinaryTreeNode root) {
@@ -227,37 +290,85 @@ public class CommonFunction {
 			System.out.println(" key(pos): "+k+ " sum : "+hash.get(k)+" ");
 	}
 
-	public static void verticalTraversal(Map<Integer,List> h, BinaryTreeNode curr, int c){
-		if(curr.left != null){
-			verticalTraversal(h,curr.left,c-1);
+	public List<List<Integer>> verticalTraversal(BinaryTreeNode root) {
+		if (root == null) return new ArrayList<List<Integer>>();
+
+ /*
+ find the location of leftmost valid node
+           4
+          /
+        1
+        in this case, offset is 1
+ */
+		int offset = dfs(root, 0);
+
+		// level order of queue and its index
+		Queue<BinaryTreeNode> queue = new LinkedList<>();
+		Queue<Integer> indices = new LinkedList<>();
+
+		queue.offer(root);
+		indices.offer(0);
+
+		List<List<Integer>> result= new ArrayList<>();
+
+		// add empty array list
+		for (int i=0; i<offset; i++) {
+			result.add(new ArrayList<>());
 		}
-		if(curr.right != null) {
-			verticalTraversal(h, curr.right, c+1);
+
+		while (!queue.isEmpty()) {
+			int size = queue.size();
+
+     /*
+     for each level, if there are 2 nodes that has same place
+     we want to add them in sorted order.
+     - but we can't just sort the original result array
+     */
+			Map<Integer, PriorityQueue<Integer>> map = new HashMap<>();
+
+			// standard level order traversal:
+			for (int i=0; i<size; i++) {
+
+				BinaryTreeNode curr = queue.poll();
+				int index = indices.poll();
+				int updatedIndex = index + offset;
+
+				if (result.size() < updatedIndex+1) {
+					result.add(new ArrayList<>());
+				}
+
+				map.putIfAbsent(updatedIndex, new PriorityQueue<>());
+				map.get(updatedIndex).add(curr.data);
+
+				if (curr.left != null) {
+					queue.offer(curr.left);
+					indices.offer(index-1);
+				}
+				if (curr.right != null) {
+					queue.offer(curr.right);
+					indices.offer(index+1);
+				}
+			}
+
+			// after each level traversal, we want to add "sorted items" into our result array.
+			for (Map.Entry<Integer, PriorityQueue<Integer>> entry: map.entrySet()) {
+				int index = entry.getKey();
+				PriorityQueue<Integer> items = entry.getValue();
+				while (!items.isEmpty()) {
+					result.get(index).add(items.poll());
+				}
+			}
 		}
-		if(h.containsKey(c)){
-			List<Integer> x = h.get(c);
-			x.add(curr.data);
-			h.put(c,x);
-		} else {
-			List<Integer> x =new ArrayList();
-			x.add(curr.data);
-			h.put(c, x);
-		}
+		return result;
 	}
 
-
-	public static void verticalTraversal(BinaryTreeNode root) {
-		HashMap<Integer, List> hash = new HashMap<>();
-		verticalTraversal(hash, root, 0);
-		System.out.println();
-		List<List> result = new ArrayList<>();
-
-		for(int k: hash.keySet()) {
-			result.add(hash.get(k));
-		}
-		result.forEach(e-> e.forEach(y -> System.out.println(y)));
-
+	private int dfs(BinaryTreeNode root, int depth) {
+		if (root == null) return depth-1;
+		int left = dfs (root.left, depth+1);
+		int right = dfs(root.right, depth-1);
+		return Math.max(left, right);
 	}
+
 
 	public static void main(String arg[]){
 //1,2,3,4,5,6,7
@@ -269,7 +380,8 @@ public class CommonFunction {
 		root.left.right = new BinaryTreeNode(5);
 		root.right.left = new BinaryTreeNode(6);
 		root.right.right = new BinaryTreeNode(7);
-		verticalTraversal(root);
+		CommonFunction c = new CommonFunction();
+		c.verticalTraversal(root);
 	}
 
 
