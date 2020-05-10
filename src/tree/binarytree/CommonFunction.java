@@ -4,6 +4,11 @@ import java.util.*;
 
 public class CommonFunction {
 
+	/**
+	 * to become cousin
+	 * 1. The nodes to be in same level
+	 * 2. They should not sibling
+	 */
 	public boolean ifCousin(BinaryTreeNode root, BinaryTreeNode a, BinaryTreeNode b){
 		if(root == null || a == null || b == null){
 			return false;
@@ -13,7 +18,7 @@ public class CommonFunction {
 			return false;
 		}
 
-		return !isSibling(root, a, b);
+		return !isSibling(root, a.data, b.data);
 	}
 
 	public int getLevelOfNode(BinaryTreeNode node, int val, int level) {
