@@ -3,10 +3,7 @@ package tree.binarytree.views;
 import tree.binarytree.BinaryTreeNode;
 
 import javax.swing.tree.TreeNode;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  *
@@ -21,7 +18,11 @@ import java.util.Queue;
  *   3. repeat the step 2 until the queue becomes empty.
  *
  *
- *   The above approach didn't worked in letcoode submission
+ *   The above approach didn't worked in letcoode submission which failed in test case
+ *      BinaryTreeNode root = new BinaryTreeNode(1);
+ *      root.left = new BinaryTreeNode(2);
+ *      root.right = new BinaryTreeNode(3);
+ *      root.left.left = new BinaryTreeNode(4);
  *
  *   Another approach is do the level order traversal and the last node of each level to the list
  *
@@ -34,16 +35,28 @@ public class BinaryTreeRightSideView {
         List<Integer> result = new ArrayList<>();
         if (root == null) return result;
 
-        Queue<BinaryTreeNode> q= new ArrayDeque<>();
+        List<Integer> interimList = new ArrayList<>();
+        Queue<BinaryTreeNode> q= new LinkedList<>();
         q.add(root);
+        q.add(null);
+
         while(!q.isEmpty()){
             BinaryTreeNode n =q.poll();
-            result.add(n.data);
+            if(n!= null) {
+                interimList.add(n.data);
 
-            if(n.right != null){
-                q.offer(n.right);
-            } else if(n.left != null){
-                q.offer(n.left);
+                if (n.left != null) {
+                    q.offer(n.left);
+                }
+                if (n.right != null) {
+                    q.offer(n.right);
+                }
+            } else{
+                if(!q.isEmpty()){
+                    q.add(null);
+                }
+                result.add(interimList.get(interimList.size()-1));
+                interimList.clear();
             }
 
         }
@@ -55,15 +68,26 @@ public class BinaryTreeRightSideView {
     public static void main(String arg[]){
 //1,2,3,4,5,6,7
 
+//        BinaryTreeNode root = new BinaryTreeNode(1);
+//        root.left = new BinaryTreeNode(2);
+//        root.right = new BinaryTreeNode(3);
+//        //root.left.left = new BinaryTreeNode(4);
+//        root.left.right = new BinaryTreeNode(5);
+//        //root.right.left = new BinaryTreeNode(6);
+//        root.right.right = new BinaryTreeNode(4);
+
+
         BinaryTreeNode root = new BinaryTreeNode(1);
-        root.left = new BinaryTreeNode(2);
-        root.right = new BinaryTreeNode(3);
-        //root.left.left = new BinaryTreeNode(4);
-        root.left.right = new BinaryTreeNode(5);
-        //root.right.left = new BinaryTreeNode(6);
-        //root.right.right = new BinaryTreeNode(4);
+//        root.left = new BinaryTreeNode(2);
+//        root.right = new BinaryTreeNode(3);
+//        //root.left.left = new BinaryTreeNode(4);
+//        root.left.right = new BinaryTreeNode(5);
+//        root.right.left = new BinaryTreeNode(6);
+//        root.right.right = new BinaryTreeNode(4);
+
         BinaryTreeRightSideView c = new BinaryTreeRightSideView();
-        c.rightSideView(root);
+        List<Integer> res = c.rightSideView(root);
+        res.forEach(e -> System.out.println(e));
     }
 
 }
