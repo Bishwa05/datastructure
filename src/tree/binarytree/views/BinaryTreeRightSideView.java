@@ -65,6 +65,23 @@ public class BinaryTreeRightSideView {
     }
 
 
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> rightSideView2(BinaryTreeNode root) {
+        dfs(root, 0);
+        return res;
+    }
+
+    private void dfs(BinaryTreeNode root, int lv) {
+        if (root == null) return;
+
+        if (lv >= res.size()) res.add(root.data);
+        // else res.set(lv, root.val); // if dfs left first
+
+        dfs(root.right, lv + 1);
+        dfs(root.left, lv + 1);
+    }
+
+
     public static void main(String arg[]){
 //1,2,3,4,5,6,7
 
@@ -78,16 +95,21 @@ public class BinaryTreeRightSideView {
 
 
         BinaryTreeNode root = new BinaryTreeNode(1);
-//        root.left = new BinaryTreeNode(2);
-//        root.right = new BinaryTreeNode(3);
-//        //root.left.left = new BinaryTreeNode(4);
-//        root.left.right = new BinaryTreeNode(5);
-//        root.right.left = new BinaryTreeNode(6);
-//        root.right.right = new BinaryTreeNode(4);
+        root.left = new BinaryTreeNode(2);
+        root.right = new BinaryTreeNode(3);
+        //root.left.left = new BinaryTreeNode(4);
+        root.left.right = new BinaryTreeNode(5);
+        root.right.left = new BinaryTreeNode(6);
+        root.right.right = new BinaryTreeNode(4);
 
         BinaryTreeRightSideView c = new BinaryTreeRightSideView();
-        List<Integer> res = c.rightSideView(root);
+//        List<Integer> res = c.rightSideView(root);
+//        res.forEach(e -> System.out.println(e));
+
+
+        List<Integer> res = c.rightSideView2(root);
         res.forEach(e -> System.out.println(e));
+
     }
 
 }
