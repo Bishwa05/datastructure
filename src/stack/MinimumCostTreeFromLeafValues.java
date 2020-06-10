@@ -2,6 +2,10 @@ package stack;
 
 import java.util.Stack;
 
+/**
+ * Leetcode
+ * 1130. Minimum Cost Tree From Leaf Values
+ */
 public class MinimumCostTreeFromLeafValues {
     public int mctFromLeafValues(int[] arr) {
         int res = 0;
