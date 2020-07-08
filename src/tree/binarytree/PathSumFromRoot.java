@@ -1,5 +1,9 @@
 package tree.binarytree;
 
+import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  *                      10
@@ -7,9 +11,9 @@ package tree.binarytree;
  *          3          5    9       4
  */
 
-public class FindHasPathSumFromRoot {
+public class PathSumFromRoot {
 
-    public static boolean hasSumPath(BinaryTreeNode node, int sum)  {
+    public boolean hasSumPath(BinaryTreeNode node, int sum)  {
         boolean ans =false;
         if(node == null)
             return sum == 0;
@@ -31,13 +35,44 @@ public class FindHasPathSumFromRoot {
     }
 
 
+    public List<List<Integer>> pathSum(BinaryTreeNode root, int sum) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        pathSumHelper(root, sum, res, temp);
+        return res;
+    }
+
+    public void pathSumHelper(BinaryTreeNode root, int sum, List<List<Integer>> res, List<Integer> temp) {
+        if(root == null){
+            return;
+        } else {
+            int subSum = sum - root.data;
+            temp.add(root.data);
+
+            if(subSum ==0 && root.left == null && root.right == null){
+                res.add(temp);
+                //temp = new ArrayList();
+                return;
+            }
+
+            pathSumHelper(root.left, subSum, res, new ArrayList(temp));
+            pathSumHelper(root.right, subSum, res, new ArrayList(temp));
+
+        }
+    }
+
 
     public static void main(String arg[]) {
 
         int sum = 25; //10+6+7
 
         BinaryTreeNode root = generateTree();
-        System.out.println(hasSumPath(root, sum));
+        PathSumFromRoot p = new PathSumFromRoot();
+        //System.out.println(p.hasSumPath(root, sum));
+
+        List<List<Integer>> res = p.pathSum(root, sum);
+
+        res.forEach(e -> e.forEach( e1 -> System.out.println(e1)));
 
 
     }
