@@ -10,6 +10,9 @@ public class CreateTree {
 	 * Construct a binary tree from Inorder and PreOrder traversals
 	 *  Inorder sequence : D B E A F C
 	 *  Preorder sequence : A B D E C F, Root A
+	 *
+	 *  Leetcode
+	 *  105. Construct Binary Tree from Preorder and Inorder Traversal
 	 */
 	public BinaryTreeNode buildBinaryTree(int[] preOrder, int[] inOrder) {
 		
@@ -36,6 +39,9 @@ public class CreateTree {
 	
 	/**
 	 * Construct a binary tree from inOrder and postOrder traversals
+	 *
+	 * 106. Construct Binary Tree from Inorder and Postorder Traversal
+	 *
 	 */
 	public BinaryTreeNode buildBinaryTree2(int[] inOrder, int[] postOrder) {
 		if(postOrder.length ==0|| inOrder.length != postOrder.length)
