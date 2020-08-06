@@ -61,6 +61,43 @@ public class PathSumFromRoot {
         }
     }
 
+    public int findMaxSumPathRec(BinaryTreeNode root){
+
+
+        if(root == null) return 0;
+
+        int left = findMaxSumPathRec(root.left);
+
+        int right =
+            findMaxSumPathRec(root.right);
+
+        return root.data + ((left > right) ?
+            left : right);
+    }
+
+    public boolean populatePath(BinaryTreeNode root, int sum, List<Integer> res){
+
+        if(sum ==0 ) return true;
+
+        if(root == null) return false;
+
+        boolean left = populatePath(root.left, sum -root.data, res);
+        boolean right = populatePath(root.right, sum - root.data, res);
+
+        if(left || right){
+            res.add(root.data);
+        }
+        return left || right;
+
+
+    }
+
+    public List<Integer> findMaxSumPath(BinaryTreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        int sum = findMaxSumPathRec(root);
+        populatePath(root, sum, res);
+        return res;
+    }
 
     public static void main(String arg[]) {
 
@@ -70,12 +107,14 @@ public class PathSumFromRoot {
         PathSumFromRoot p = new PathSumFromRoot();
         //System.out.println(p.hasSumPath(root, sum));
 
-        List<List<Integer>> res = p.pathSum(root, sum);
+//        List<List<Integer>> res = p.pathSum(root, sum);
+//
+//        res.forEach(e -> e.forEach( e1 -> System.out.println(e1)));
 
-        res.forEach(e -> e.forEach( e1 -> System.out.println(e1)));
-
+        p.findMaxSumPath(root).forEach(e -> System.out.println(e));
 
     }
+
     public static BinaryTreeNode generateTree() {
 
         BinaryTreeNode root = new BinaryTreeNode(10);
@@ -95,5 +134,4 @@ public class PathSumFromRoot {
 
         return root;
     }
-
 }
