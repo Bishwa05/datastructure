@@ -188,6 +188,10 @@ public class LinkedList {
 
 	}
 
+    /**
+     * https://leetcode.com/explore/challenge/card/august-leetcoding-challenge/551/week-3-august-15th-august-21st/3430/
+     * @param head
+     */
 	public static void reorderList(ListNode head) {
 
 		if (head != null && head.next != null) {
