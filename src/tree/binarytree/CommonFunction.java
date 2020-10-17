@@ -375,9 +375,48 @@ public class CommonFunction {
 	}
 
 
+	public static BinaryTreeNode invertBinaryTree(BinaryTreeNode root){
+
+		if(root.left != null && root.right != null){
+			swapChild(root);
+			invertBinaryTree(root.left);
+			invertBinaryTree(root.right);
+		}
+		return root;
+	}
+
+	public static void swapChild(BinaryTreeNode root){
+		BinaryTreeNode t = root.left;
+		root.left = root.right;
+		root.right = t;
+	}
+
+	public static void display(BinaryTreeNode root){
+		Queue<BinaryTreeNode> q = new LinkedList<>();
+		q.add(root);
+
+		while(!q.isEmpty()){
+			BinaryTreeNode n = q.poll();
+			System.out.println(n.data);
+			if(n.left!= null){
+				q.offer(n.left);
+			}
+			if(n.right != null){
+				q.offer(n.right);
+			}
+		}
+	}
+
+
+
 	public static void main(String arg[]){
 //1,2,3,4,5,6,7
 
+		/**
+		 * 						1
+		 * 			2							3
+		 * 		4		5				6				7
+		 */
 		BinaryTreeNode root = new BinaryTreeNode(1);
 		root.left = new BinaryTreeNode(2);
 		root.right = new BinaryTreeNode(3);
@@ -386,7 +425,9 @@ public class CommonFunction {
 		root.right.left = new BinaryTreeNode(6);
 		root.right.right = new BinaryTreeNode(7);
 		CommonFunction c = new CommonFunction();
-		c.verticalTraversal(root);
+		// c.verticalTraversal(root);
+		BinaryTreeNode d = c.invertBinaryTree(root);
+		c.display(d);
 	}
 
 
