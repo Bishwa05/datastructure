@@ -374,10 +374,14 @@ public class CommonFunction {
 		return Math.max(left, right);
 	}
 
-
+    /**
+     * Invert a binary Tree
+     * @param root
+     * @return
+     */
 	public static BinaryTreeNode invertBinaryTree(BinaryTreeNode root){
 
-		if(root.left != null && root.right != null){
+		if(root != null){
 			swapChild(root);
 			invertBinaryTree(root.left);
 			invertBinaryTree(root.right);
@@ -390,6 +394,19 @@ public class CommonFunction {
 		root.left = root.right;
 		root.right = t;
 	}
+
+    public static BinaryTreeNode invertBinaryTreeItr(BinaryTreeNode root){
+	    Queue<BinaryTreeNode> q = new LinkedList<>();
+	    q.offer(root);
+	    while(!q.isEmpty()){
+	        BinaryTreeNode t = q.poll();
+	        if(t == null) continue;
+            swapChild(t);
+            q.offer(t.left);
+            q.offer(t.right);
+        }
+        return root;
+    }
 
 	public static void display(BinaryTreeNode root){
 		Queue<BinaryTreeNode> q = new LinkedList<>();
@@ -426,7 +443,7 @@ public class CommonFunction {
 		root.right.right = new BinaryTreeNode(7);
 		CommonFunction c = new CommonFunction();
 		// c.verticalTraversal(root);
-		BinaryTreeNode d = c.invertBinaryTree(root);
+		BinaryTreeNode d = c.invertBinaryTreeItr(root);
 		c.display(d);
 	}
 
