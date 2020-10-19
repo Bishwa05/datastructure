@@ -14,6 +14,16 @@ import java.util.Map;
  * FindSet: An operation to return an identity of a set which usually
  * an element in a set which acts as representative of that set.
  */
+
+class Node {
+    int rank;
+    long data;
+    Node parent;
+
+    Node(long data){
+        this.data = data;
+    }
+}
 public class DisJointSetImpl {
     Map<Long, Node> map = new HashMap<>();
 

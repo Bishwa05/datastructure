@@ -1,5 +1,9 @@
 package disjointset;
 
+/**
+ * Size is the limitation here as Array is used in backend.
+ * Another efficient approach is in DisjointSetImpl.
+ */
 public class DisjointUnionSets {
     int[] rank, parent;
     int n;
