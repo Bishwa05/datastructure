@@ -7,9 +7,9 @@ package tree.binarysearchtree;
  *  3. Both the left and right subtrees must also be Binary Search Trees.
  */
 public class BSTNode {
-    private int data;
-    private BSTNode left;
-    private BSTNode right;
+    public int data;
+    public BSTNode left;
+    public BSTNode right;
 
     public BSTNode () {
     }

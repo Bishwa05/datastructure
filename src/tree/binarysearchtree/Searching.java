@@ -301,4 +301,45 @@ public class Searching {
 
         }
     }
+
+
+    int ans;
+    public int rangeSumBST(BSTNode root, int low, int high) {
+        ans = 0;
+        dfs(root, low, high);
+        return ans;
+    }
+
+    public void dfs(BSTNode node, int L, int R){
+        if(node != null){
+            if(L <=node.data && node.data <=R)
+                ans +=node.data;
+            if(L< node.data)
+                dfs(node.left, L, R);
+            if(node.data<R)
+                dfs(node.right, L, R);
+
+        }
+    }
+
+    public int rangeSumBSTItr(BSTNode root, int low, int high) {
+        int sum =0;
+        Queue<BSTNode> q = new LinkedList<>();
+        q.add(root);
+
+
+        while(!q.isEmpty()){
+            BSTNode curr = q.poll();
+            if(curr.data>=low && curr.data<=high){
+                sum+=curr.data;
+            }
+            if(curr.left != null && curr.data>low){
+                q.add(curr.left);
+            }
+            if(curr.right != null && curr.data< high){
+                q.add(curr.right);
+            }
+        }
+        return sum;
+    }
 }
