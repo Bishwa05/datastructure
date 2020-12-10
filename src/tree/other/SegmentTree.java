@@ -2,6 +2,13 @@ package tree.other;
 
 /**
  *
+ * Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
+ * The update(i, val) function modifies nums by updating the element at index i to val.
+ *
+ */
+
+/**
+ *
  * A segment tree is a binary tree where each node represents an interval.
  * Generally a node would store one or more properties of an interval which can be
  * queried later.

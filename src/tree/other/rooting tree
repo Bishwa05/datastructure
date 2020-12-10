@@ -1,0 +1,26 @@
+class TreeNode {
+    int id;
+
+    TreeNode parent;
+
+    TreeNode[] children;
+}
+
+function rootTree(g, rootId =0){ #default rootId =0
+    root = TreeNode(rootId, null, [])
+    return buildTree(g, root, null)
+}
+
+
+function buildTree(g, node, parent){
+    for (childId : g[node.id]){
+        # Avoid adding an edge pointing back to the parent
+        if( parent !=null && childId == parent.id){
+            continue;
+        }
+        child = TreeNode(childId, node, [])
+        node.children.add(child)
+        buildTree(g, child, node)
+    }
+    return node
+}

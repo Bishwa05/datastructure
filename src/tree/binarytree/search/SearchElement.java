@@ -3,6 +3,7 @@ package tree.binarytree.search;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.sun.source.tree.BinaryTree;
 import tree.binarytree.BinaryTreeNode;
 
 public class SearchElement {
@@ -40,9 +41,9 @@ public class SearchElement {
 				max = curr.data;
 			if(curr != null) {
 				if(curr.left != null)
-					curr = curr.left;
+					q.offer(curr.left);
 				if(curr.right != null)
-					curr= curr.right;
+					q.offer(curr.right);
 			}
 		}
 		return max;
@@ -176,5 +177,24 @@ public class SearchElement {
 				quasiIsomorphic(root1.right, root2.left) &&
 						quasiIsomorphic(root1.left, root2.right)));
 
+	}
+
+	/**
+	 * Find lowest common ancestor in a binary tree
+	 */
+	public BinaryTreeNode lca (BinaryTreeNode root, BinaryTreeNode n1, BinaryTreeNode n2){
+		if(root == null){
+			return null;
+		}
+		if(root == n1 || root == n2){
+			return root;
+		}
+		BinaryTreeNode left  = lca(root.left, n1, n2);
+		BinaryTreeNode right = lca(root.right, n1, n2);
+
+		if(left != null && right != null){
+			return root;
+		}
+		return left!=null ? left: right;
 	}
 }
