@@ -146,23 +146,7 @@ public class LeafOps {
 		return false;
 	}
 	
-	/**
-	 * Least Common Ancestors
-	 */
-	public BinaryTreeNode LCA(BinaryTreeNode root, BinaryTreeNode a, BinaryTreeNode b) {
-		BinaryTreeNode left, right;
-		if(root == null)
-			return root;
-		if(root ==a || root==b)
-			return root;
-		left = LCA(root.left, a, b);
-		right = LCA(root.right, a, b);
-		if(left != null && right != null)
-			return root; //nodes are each on a separate branch
-		else
-			return(left != null? left:right);
-		//Either 1 node is on 1 branch or none was found in any of the branches
-	}
+
 
 	/**
 	 * 1302. Deepest Leaves Sum
