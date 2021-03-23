@@ -27,8 +27,9 @@ public class Creation {
         }
         int mid = start + (end - start)/2;
 
-        BSTNode root = new BSTNode(head.getVal());
+
         BSTNode left = constructRec(head,start,mid-1);
+        BSTNode root = new BSTNode(head.getVal());
         root.setLeft(left);
 
         if(head.next != null) {
