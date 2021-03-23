@@ -7,7 +7,7 @@ import tree.binarysearchtree.TreeNode;
 public class Creation {
     /**
      * Convert a sorted doubly linked list to balanced binary tree
-     *
+     * also works for singly linked list
      */
     public BSTNode sortedListToBST(ListNode head) {
 

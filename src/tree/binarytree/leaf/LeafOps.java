@@ -186,4 +186,55 @@ public class LeafOps {
 
 	}
 
+	/**
+	 *
+	 * 129. Sum Root to Leaf Numbers
+	 * https://leetcode.com/problems/sum-root-to-leaf-numbers/
+	 *
+	 */
+
+	public int sumNumbers(BinaryTreeNode root) {
+		return sumNumbersRec(root, ""+root.data);
+	}
+
+	public int sumNumbersRec(BinaryTreeNode root, String val) {
+		if(root ==null) return 0;
+
+		if(root.left == null && root.right == null){
+			int pathSum = Integer.parseInt(val);
+			return pathSum;
+		}
+
+		if(root.left != null && root.right == null){
+			return sumNumbersRec(root.left, ""+val + root.left.data);
+		} else if(root.right != null && root.left == null){
+			return sumNumbersRec(root.right, ""+val + root.right.data);
+		} else {
+
+			return sumNumbersRec(root.left, "" + val + root.left.data) + sumNumbersRec(root.right,
+				"" + val + root.right.data);
+		}
+	}
+
+	/**
+	 * Another better solution
+	 */
+	int sum = 0;
+	int val = 0;
+	public int sumNumbers2(BinaryTreeNode root) {
+		if(root == null)
+			return 0;
+
+		val = val*10 + root.data;
+
+		if(root.left == null && root.right == null) {
+			sum += val;
+		}
+
+		sumNumbers2(root.left);
+		sumNumbers2(root.right);
+		val = val/10;
+
+		return sum;
+	}
 }
