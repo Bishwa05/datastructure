@@ -32,7 +32,7 @@ public class OtherTraversals {
 				copyCurrLvl.addAll(currlvl);
 				lTree.add(copyCurrLvl);
 				currlvl.clear();
-				if(q.isEmpty())
+				if(!q.isEmpty())
 					q.offer(null);
 			}
 		}

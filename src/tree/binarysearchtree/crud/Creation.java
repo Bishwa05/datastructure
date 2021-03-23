@@ -2,6 +2,7 @@ package tree.binarysearchtree.crud;
 
 import linklist.singly.ListNode;
 import tree.binarysearchtree.BSTNode;
+import tree.binarysearchtree.TreeNode;
 
 public class Creation {
     /**
@@ -119,6 +120,48 @@ public class Creation {
     public BSTNode bstFromPreorder(int[] preorder) {
         BSTNode root = constructBST(preorder, 0, preorder.length - 1);
         return root;
+    }
+
+
+    /**
+     * Convert a sorted List to BST
+     * Leetcode 109
+     * https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
+     */
+
+    private ListNode head;
+
+    private int findSize(ListNode head){
+        ListNode ptr = head;
+        int c=0;
+        while(ptr != null){
+            ptr = ptr.next;
+            c+=1;
+        }
+        return c;
+    }
+
+    private TreeNode convertListToBST(int l, int r) {
+        //Invalid case
+        if(l> r) return null;
+
+        int mid = (l+r)>>1;
+
+        TreeNode left = convertListToBST(1, mid-1);
+
+        //process the head once left half traversed
+        TreeNode node = new TreeNode(head.val);
+        node.left = left;
+        head = head.next;
+
+        node.right = convertListToBST(mid+1, r);
+        return node;
+    }
+    //Singly l list
+    public TreeNode sortedListToBST2(ListNode head){
+        int size = findSize(head);
+        this.head = head;
+        return convertListToBST(0, size-1);
     }
 
 }
