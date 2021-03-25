@@ -4,7 +4,7 @@ import tree.binarytree.BinaryTreeNode;
 
 public class SmallestStringStartingFromLeaf
 {
-    String ans = "-";
+    String ans = "";
     public String smallestFromLeaf(BinaryTreeNode root) {
         dfs(root, new StringBuilder());
         return ans;
@@ -20,7 +20,7 @@ public class SmallestStringStartingFromLeaf
 
             sb.reverse();
 
-            if(s.compareTo(ans)<0){
+            if("".equals(ans) ||s.compareTo(ans)<0){
                 ans = s;
             }
         }
