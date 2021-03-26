@@ -425,6 +425,46 @@ public class CommonFunction {
 	}
 
 
+	public boolean isSymmetric(BinaryTreeNode root) {
+		return isMirror(root, root);
+	}
+
+	public boolean isMirror(BinaryTreeNode root1, BinaryTreeNode root2){
+
+		if(root1 == null && root2 == null) return true;
+		if(root1 == null && root2 != null ||
+		root1 != null && root1 == null) return false
+
+		return (root1.data == root2.data) &&
+			isMirror(root1.left, root2.right) &&
+			isMirror(root1.right, root2.left);
+	}
+
+
+	public boolean isSymmetricItr(BinaryTreeNode root) {
+		//return isMirror(root, root);
+		Queue<BinaryTreeNode> q = new LinkedList<>();
+
+		q.offer(root);
+		q.offer(root);
+
+		while(!q.isEmpty()){
+			BinaryTreeNode root1 = 	q.poll();
+			BinaryTreeNode root2 = 	q.poll();
+
+			if (root1 == null && root2 == null) continue;
+			if (root1 == null || root2 == null) return false;
+
+			if(root1.data != root2.data) return false;
+
+			q.offer(root1.left);
+			q.offer(root2.right);
+			q.offer(root1.right);
+			q.offer(root2.left);
+		}
+		return true;
+	}
+
 
 	public static void main(String arg[]){
 //1,2,3,4,5,6,7
