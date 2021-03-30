@@ -433,7 +433,7 @@ public class CommonFunction {
 
 		if(root1 == null && root2 == null) return true;
 		if(root1 == null && root2 != null ||
-		root1 != null && root1 == null) return false
+		root1 != null && root1 == null) return false;
 
 		return (root1.data == root2.data) &&
 			isMirror(root1.left, root2.right) &&
