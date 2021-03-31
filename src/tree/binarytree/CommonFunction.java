@@ -466,6 +466,51 @@ public class CommonFunction {
 	}
 
 
+	public boolean isHeightBalancedRec(BinaryTreeNode root){
+		return getDepth(root) != -1;
+	}
+
+	private int getDepth(BinaryTreeNode root){
+		if(root == null) return 0;
+
+		int leftHeight = getDepth(root.left);
+		if(leftHeight == -1) return -1;
+
+		int rightHeight = getDepth(root.right);
+		if(rightHeight == -1) return -1;
+
+		if(Math.abs(leftHeight - rightHeight) > 1) return -1;
+
+		return 1 + Math.max(leftHeight, rightHeight);
+	}
+
+	public boolean isHeightBalancedItr(BinaryTreeNode root){
+		if(root == null) return true;
+		Map<BinaryTreeNode, Integer> heights = new HashMap<>();
+		ArrayDeque<BinaryTreeNode> stack = new ArrayDeque<>();
+		stack.push(root);
+		while(!stack.isEmpty()){
+			BinaryTreeNode curr = stack.peek();
+			if(curr.left != null && !heights.containsKey(curr.left)){
+				curr = curr.left;
+				stack.push(curr);
+			}
+			else if(curr.right != null && !heights.containsKey(curr.right)){
+				curr = curr.right;
+				stack.push(curr);
+			}
+			else{
+				int leftHeight = curr.left == null? 0: heights.get(curr.left);
+				int rightHeight = curr.right == null? 0: heights.get(curr.right);
+				if(Math.abs(leftHeight - rightHeight) > 1) return false;
+				heights.put(curr, 1 + Math.max(leftHeight, rightHeight));
+				stack.pop();
+			}
+		}
+		return true;
+	}
+
+
 	public static void main(String arg[]){
 //1,2,3,4,5,6,7
 
