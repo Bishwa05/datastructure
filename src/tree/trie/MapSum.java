@@ -34,7 +34,7 @@ public class MapSum {
     private TrieNode root;
 
     public MapSum() {
-        this.map = new HashMap<String, Integer>();
+        this.map = new HashMap<>();
         this.root = new TrieNode();
     }
 

@@ -143,7 +143,8 @@ public class CommonFunction {
 			
 			if(curr != null) {
 				if(curr.left == null && curr.right == null) {
-					return count;
+					// return count;
+					continue;
 				}
 				if(curr.left != null) {
 					q.offer(curr.left);

@@ -31,6 +31,22 @@ public class WordDictionary {
      *
      */
 
+//    public void addWord(String word){
+//
+//        if(root == null){
+//            root = new TrieNode();
+//        }
+//
+//        TrieNode curr = root;
+//        for(char c : word.toCharArray()){
+//            if(curr.children[c-'a']== null){
+//                curr.children[c-'a'] = new TrieNode();
+//            }
+//            curr = curr.children[c-'a'];
+//        }
+//        curr.isLeaf = true;
+//    }
+
     public void addWord(String word){
         if(root== null){
             root = new TrieNode();

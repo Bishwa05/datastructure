@@ -26,7 +26,7 @@ public class ReplaceWords {
         curr.isLeaf = true;
     }
 
-    public String getRepalcedWord(TrieNode root, String sWord){
+    public String getReplacedWord(TrieNode root, String sWord){
         TrieNode curr = root;
 
         for(int i =0; i< sWord.length(); i++){
@@ -56,7 +56,7 @@ public class ReplaceWords {
 
 
         for(String sWords : senWords) {
-            sb.append(" ").append(getRepalcedWord(root,sWords));
+            sb.append(" ").append(getReplacedWord(root,sWords));
         }
         sb.deleteCharAt(0);
         return sb.toString();
