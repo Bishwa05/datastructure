@@ -152,6 +152,7 @@ public class SearchInList {
 		}else {
 			head1 = node1;
 			head2 = node2;
+			diff = l1 -l2;
 		}
 		
 		for(int i=0; i< diff; i++)
