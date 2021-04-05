@@ -1,6 +1,8 @@
 package tree.binarytree.leaf;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import tree.binarytree.BinaryTreeNode;
@@ -90,6 +92,40 @@ public class LeafOps {
 			System.out.println(ints[i]+" ");
 		}
 		System.out.println();
+	}
+
+
+	// Done in leetcode 257. Binary Tree Paths
+	public List<String> binaryTreePaths(BinaryTreeNode root) {
+		List<String> res = new ArrayList<>();
+
+		dfs(root, new ArrayList<>(), res);
+		return res;
+	}
+
+	public void dfs(BinaryTreeNode root, List<Integer> temp, List<String> res){
+		temp.add(root.data);
+		if(root.left == null && root.right == null){
+			StringBuilder sb = new StringBuilder();
+			for(int i : temp) {
+				sb.append(i).append("->");
+			}
+			sb.delete(sb.length()-2, sb.length());
+			res.add(sb.toString());
+
+		}
+
+		if(root.left != null){
+			dfs(root.left, temp, res);
+			if(temp.size()>0)
+				temp.remove(temp.size()-1);
+		}
+		if(root.right != null){
+			dfs(root.right, temp, res);
+			if(temp.size()>0)
+				temp.remove(temp.size()-1);
+		}
+
 	}
 	
 	

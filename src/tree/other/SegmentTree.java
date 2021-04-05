@@ -25,6 +25,9 @@ package tree.other;
  *
  * tree[] = { 183, 82, 101, 48, 34, 43, 58, 35, 13, 19, 15, 31, 12, 33, 25, 18, 17,
  * 0, 0, 0, 0, 0, 0, 11, 20, 0, 0, 0, 0, 0, 0 };
+ *
+ * time complexity to find range sum = O(log n).
+ * time complexity to update an element = O(log n)
  */
 
 public class SegmentTree {
@@ -90,6 +93,15 @@ public class SegmentTree {
         current.rightChild = buildTree(nums, mid+1, j);
         current.sum = current.leftChild.sum + current.rightChild.sum;
         return current;
+    }
+
+    public static void main(String arg[]){
+        int []nums = {7, 8, 2, 3, 9, 1, 5};
+        SegmentTree st = new SegmentTree(nums);
+        System.out.println(st.sumRange(2, 4)); // 14
+        st.update(4, 4);
+        System.out.println(st.sumRange(2, 4)); // 9
+
     }
 
 }
