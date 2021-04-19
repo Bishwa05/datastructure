@@ -58,7 +58,7 @@ public class SearchInList {
 	}
 	
 	/*
-	 * check whetehr the given linked list is either NULL terminated or not
+	 * check whether the given linked list is either NULL terminated or not
 	 * If there is a cycle then find the start node of the loop.
 	 */
 	public static ListNode findBeginOfLoop(ListNode head) {

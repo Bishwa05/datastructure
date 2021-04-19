@@ -4,6 +4,10 @@ import java.util.Stack;
 
 import tree.binarytree.BinaryTreeNode;
 
+/**
+ *
+ * Left --> Right --> Root
+ */
 public class PostOrderTraversal {
 	
 	public void postOrderRec(BinaryTreeNode root) {

@@ -7,7 +7,7 @@ import tree.binarytree.BinaryTreeNode;
 /**
  * 
  * @author i501895
- *	Left --> Right--> Root
+ *	Left --> Root --> Right
  */
 public class InOrderTraversal {
 

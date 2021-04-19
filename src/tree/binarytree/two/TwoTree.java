@@ -29,7 +29,7 @@ public class TwoTree {
 	
 	//Whether provided 2 trees are mirrors to each other
 	public boolean areMirrors(BinaryTreeNode root1, BinaryTreeNode root2) {
-		if(root1 == null & root2 == null)
+		if(root1 == null && root2 == null)
 			return true;
 		if(root1 == null || root2== null)
 			return false;
